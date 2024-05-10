@@ -80,11 +80,23 @@ function renderData(videoGames){
         const videoGameDevelopers = document.createElement("p");
         videoGameDevelopers.textContent = `Developers: ${videoGame.developers ? videoGame.developers.map(developer => developer.name).join(', ') : ''}`; // Check if developers is defined before mapping
 
+
+
+		const videoGameGenres = document.createElement("p");
+        videoGameGenres.textContent = `Genres: ${videoGame.genres ? videoGame.genres.map(genre => genre.name).join(', ') : ''}`; // Check if genres is defined before mapping
+        
+        const videoGamePublishers = document.createElement("p");
+        videoGamePublishers.textContent = `Publishers: ${videoGame.publishers ? videoGame.publishers.map(publisher => publisher.name).join(', ') : ''}`; // Check if publishers is defined before mapping
+
         gameCard.appendChild(gameImage);
         gameCard.appendChild(videoGameName);
         gameCard.appendChild(videoGameReleased);
         gameCard.appendChild(videoGamePlatforms);
         gameCard.appendChild(videoGameDevelopers);
+
+
+		gameCard.appendChild(videoGameGenres);
+		gameCard.appendChild(videoGamePublishers);
 
         gameList.appendChild(gameCard);
     });

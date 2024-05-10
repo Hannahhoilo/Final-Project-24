@@ -1,4 +1,23 @@
+/*--colors-bg--300: #1e181e;
+--colors-bg--500: #191a1e;
+--colors-primary--200: #f4908b;
+--colors-primary--300: #ea6f69;
+--colors-primary--500: #e8615a;
+--colors-primary--600: #9c3230;
+--colors-primary--700: #5e2122;
+--colors-primary--800: #451717;
+--colors-primary--900: #3c181a;
+--colors-secondary--500: #2be4ea;
+--colors-secondary--900: #295459;
+--colors-tertiary--500: #fed33f;
+--colors-on_bg--500: var(--colors-primary--500);
+--colors-on_tertiary--500: var(--colors-bg--300);
+--colors-on_primary--500: var(--colors-primary--200);
+--colors-active--500: #2bfea0;
+--fonts-primary: "Rajdhani", sans-serif;
+--fonts-secondary: "VT323", monospace;
 
+*/
   
   * {
 	margin: 0;
@@ -133,19 +152,27 @@ main {
 
 .main-content-container {
     display: flex;
+	flex-direction: row;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     justify-content: space-between; /* Distribute items evenly with space between them */
+	justify-content: center;
+	gap: 10px;
+	flex-basis: 350px;
+	align-content: flex-start;
+	
 }
 
 
 .game-card {
-	
-    border: 1px solid #ccc;
+	align-content: flex-start;
+	flex-direction: row;
+    border: 1px solid #00fbffde;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px;
-    background-color: #fff;
+	color:#e5f73ede;
+	background: linear-gradient(to bottom, #322b3b, #453b52);
     max-width: 300px; /* Adjust the maximum width of the game card */
 }
 
@@ -157,6 +184,7 @@ main {
 
 .game-card h3 {
     font-size: 18px;
+	font-weight: bold;
     margin-bottom: 10px;
 }
 
@@ -164,8 +192,6 @@ main {
     font-size: 14px;
     margin-bottom: 5px;
 }
-
-
 
 
 
