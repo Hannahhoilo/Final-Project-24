@@ -105,14 +105,13 @@ function renderData(videoGames){
 
 /* Filter */
 
-
-// Function to filter games by genre
-function filterByGenre(games, genres) {
+/* // Function to filter games by genre
+function filterByGenre(newVideoGame, genres) {
     return filterVideoGames.filter(game => game.genres === genres);
 }
 
 // Function to filter games by platform
-function filterByPlatform(games, platform) {
+function filterByPlatform(newVideoGame, platform) {
     return filterVideoGames.filter(game => game.platform === platform);
 }
 
@@ -123,6 +122,45 @@ console.log('Games filtered by genre:', filteredByGenres);
 const filteredByPlatform = filterByPlatform(games, 'PlayStation');
 console.log('Games filtered by platform:', filteredByPlatform);
 
+
+ */
+
+
+
+
+// Event Listeners
+
+const genreSelect = document.getElementById('filter-ByGenre');
+const platformSelect = document.getElementById('platform-select');
+
+genreSelect.addEventListener('change', () => {
+  const selectedGenre = genreSelect.value;
+  filterByGenre(videoGames, selectedGenre);
+});
+
+platformSelect.addEventListener('change', () => {
+  const selectedPlatform = platformSelect.value;
+  filterByPlatform(videoGames, selectedPlatform);
+});
+
+
+
+// Filtering Functions
+
+function filterByGenre(videoGames, genre) {
+	const filteredGames = videoGames.filter(game => {
+	  return game.genres.includes(genre);
+	});
+	renderData(filteredGames);
+	console.log(filteredGames);
+  }
+  
+  function filterByPlatform(videoGames, platform) {
+	const filteredGames = videoGames.filter(game => {
+	  return game.platforms.includes(platform);
+	});
+	renderData(filteredGames);
+  }
 
 
 
