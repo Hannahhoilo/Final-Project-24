@@ -102,4 +102,30 @@ function renderData(videoGames){
     });
 }
 
+
+/* Filter */
+
+
+// Function to filter games by genre
+function filterByGenre(games, genres) {
+    return filterVideoGames.filter(game => game.genres === genres);
+}
+
+// Function to filter games by platform
+function filterByPlatform(games, platform) {
+    return filterVideoGames.filter(game => game.platform === platform);
+}
+
+// Example of applying filters based on user input
+const filteredByGenre = filterByGenre(games, 'Action');
+console.log('Games filtered by genre:', filteredByGenres);
+
+const filteredByPlatform = filterByPlatform(games, 'PlayStation');
+console.log('Games filtered by platform:', filteredByPlatform);
+
+
+
+
+
+
 export default renderData;
