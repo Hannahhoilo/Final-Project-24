@@ -1,5 +1,14 @@
 
-/* const gameList = document.querySelector(".game-list");
+/*
+
+
+
+
+
+------------------------------------------------------
+
+
+const gameList = document.querySelector(".game-list");
 
 const url = 'https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f'
 
@@ -130,8 +139,8 @@ console.log('Games filtered by platform:', filteredByPlatform);
 
 // Event Listeners
 
-const genreSelect = document.getElementById('filter-ByGenre');
-const platformSelect = document.getElementById('platform-select');
+const genreSelect = document.getElementById('filter_by_genre');
+const platformSelect = document.getElementById('filter_by_platform');
 
 genreSelect.addEventListener('change', () => {
   const selectedGenre = genreSelect.value;
@@ -152,7 +161,7 @@ function filterByGenre(videoGames, genre) {
 	  return game.genres.includes(genre);
 	});
 	renderData(filteredGames);
-	console.log(filteredGames);
+	
   }
   
   function filterByPlatform(videoGames, platform) {
@@ -161,6 +170,8 @@ function filterByGenre(videoGames, genre) {
 	});
 	renderData(filteredGames);
   }
+
+  console.log(filteredGames, selectedGenre);
 
 
 
