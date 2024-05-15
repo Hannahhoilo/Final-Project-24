@@ -51,8 +51,8 @@ main {
 	position: relative;
 	/*
 	background-color: #0f1035; */
-	background-color: #392529;
-	background: linear-gradient(to bottom, #392529, #d82f51);
+/* 	background-color: #392529;
+	background: linear-gradient(to bottom, #392529, #d82f51); */
 }
 
 
@@ -176,7 +176,7 @@ main {
 	flex-basis: 20%;
 	height: 100vh;
 	
-	
+	flex-wrap: wrap;
 	flex-direction: column;
 	gap: 1rem;
 	padding: 1rem;
@@ -203,6 +203,7 @@ main {
 	cursor: pointer;
 	color: #e5f73ede;
 }
+
 .filter-by-platform-buttons button {
 	
 	background-color: transparent;
@@ -211,6 +212,21 @@ main {
 	font-size: large;
 	cursor: pointer;
 	color: #e5f73ede;
+}
+
+.sort-buttons button {
+	background-color: transparent;
+	border: none;
+	font-weight: bold;
+	font-size: large;
+	cursor: pointer;
+	color: #e5f73ede;
+}
+
+.search {
+	height: 2rem;
+	border:solid 2px #27f8ff;
+	border-radius: 5px;
 }
 
 .sign-out-button {
@@ -237,6 +253,7 @@ main {
     justify-content: space-between; /* Distribute items evenly with space between them */
 	justify-content: center;
 	gap: 10px;
+	margin-top: 2rem;
 	
 	align-content: flex-start;
 }

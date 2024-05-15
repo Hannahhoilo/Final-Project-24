@@ -65,9 +65,9 @@ function renderData(videoGames){
 }
  */
 
-import {fetchedGameData} from './app.js'
+/* import {fetchedGameData} from './app'
 
-
+console.log("from render", fetchedGameData); */
 
 function renderData(videoGames){
     const gameList = document.querySelector('.game-list');
@@ -140,51 +140,5 @@ console.log('Games filtered by platform:', filteredByPlatform);
 
 
 
-// Event Listeners
-
-const genreSelect = document.getElementById('filter_by_genre');
-const platformSelect = document.getElementById('filter_by_platform');
-
-genreSelect.addEventListener('click', () => {
-  const selectedGenre = genreSelect.value;
-
-  console.log('Selected genre:', selectedGenre);
-
-  filterByGenre(fetchedGameData, selectedGenre);
-});
-
-platformSelect.addEventListener('click', () => {
-  const selectedPlatform = platformSelect.value;
-
-  console.log('Selected platform:', selectedPlatform);
-  filterByPlatform(fetchedGameData, selectedPlatform);
-});
-
-
-
-// Filtering Functions
-
-function filterByGenre(fetchedGameData, genre) {
-    const filteredGames = fetchedGameData.filter(game => {
-        return game.genres.includes(genre);
-    });
-    console.log('Filtered games by genre:', filteredGames); // Log the filtered games
-    renderData(filteredGames);
-}
-
-/* function filterByGenre(fetchedGameData, genre) {
-	const filteredGames = fetchedGameData.filter(game => {
-	  return game.genres.includes(genre);
-	});
-	renderData(filteredGames);
-	
-  } */
-  
-  function filterByPlatform(fetchedGameData, platform) {
-	const filteredGames = fetchedGameData.filter(game => {
-	  return game.platforms.includes(platform);
-	});
-	renderData(filteredGames);
-  }
 
 export default renderData;

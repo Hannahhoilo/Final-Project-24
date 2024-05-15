@@ -24,7 +24,7 @@ import {validateSignInForm} from './signInValidation';
 import {validateSignUpForm} from './signUpValidation';
 import renderData from './renderData';
 
-
+let fetchedGameData = [];
 
 /* SELECTING THE SIGN IN FORM ELEMENTS */
 const emailInput = document.querySelector('.email');
@@ -168,7 +168,7 @@ signInButton.addEventListener('click', (e)=>{
 
 //dataOfGames[] = {data};
 //export const [dataOfGames] = (data);
-let fetchedGameData = [];
+
 
 /* FETCH GAME DATA FROM API */
 async function fetchData(){
@@ -176,7 +176,7 @@ async function fetchData(){
 		if(!dataExists){
 		const response = await fetch('https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f');
 		const data = await response.json();
-		console.log(data);
+
 		storeData(data);
 
 		fetchedGameData.push(...data.results);
@@ -186,8 +186,67 @@ async function fetchData(){
 	}
 }
 
+/*
+separtert med filter kategotty , med sswitch 
+
+når man bruker filter så skal man map gjennom arrayyen på nytt 
+*/
 
 fetchData();
+
+/* FILTER */
+
+// Event Listeners
+
+const genreSelect = document.getElementById('filter_by_genre');
+const platformSelect = document.getElementById('filter_by_platform');
+
+genreSelect.addEventListener('click', () => {
+  const selectedGenre = genreSelect.value;
+
+  console.log('Selected genre:', selectedGenre);
+
+  filterByGenre(fetchedGameData, selectedGenre);
+});
+
+platformSelect.addEventListener('click', () => {
+  const selectedPlatform = platformSelect.value;
+
+  console.log('Selected platform:', selectedPlatform);
+  filterByPlatform(fetchedGameData, selectedPlatform);
+});
+
+
+
+// Filtering Functions
+
+function filterByGenre(fetchedGameData, genre) {
+    const filteredGames = fetchedGameData.filter(game => {
+        return game.genres.includes(genre);
+    });
+    console.log('Filtered games by genre:', filteredGames); // Log the filtered games
+    renderData(filteredGames);
+}
+
+/* function filterByGenre(fetchedGameData, genre) {
+	const filteredGames = fetchedGameData.filter(game => {
+	  return game.genres.includes(genre);
+	});
+	renderData(filteredGames);
+	
+  } */
+  
+  function filterByPlatform(fetchedGameData, platform) {
+	const filteredGames = fetchedGameData.filter(game => {
+	  return game.platforms.includes(platform);
+	});
+	renderData(filteredGames);
+  }
+
+
+
+/*------------------------*/
+
 
 
 

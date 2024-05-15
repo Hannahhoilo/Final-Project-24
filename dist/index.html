@@ -9,9 +9,9 @@
 </head>
 
 <body>
-	<header>
+<!-- 	<header>
 		<h1>Gameflix</h1>
-	</header>
+	</header> -->
 
 	<main>
 		<form class="sign-in-form">
@@ -62,7 +62,7 @@
 			<div class="sidebar">
 				<h2>Gameflix</h2>
 
-				<h2>Select genre:</h2>
+				<h3>Select genre:</h3>
 				<div class="filter-by-genre-buttons">
 
 					<button id="filter_by_genre" value="action">Action</button>
@@ -74,7 +74,7 @@
 					<button id="filter_by_genre" value="platformer">Platformer</button>
 				</div>
 
-				<h2>Select platform:</h2>
+				<h3>Select platform:</h3>
 				<div class="filter-by-platform-buttons">
 
 					<button id="filter_by_platform" value="pc">PC</button>
@@ -83,6 +83,18 @@
 					<button id="filter_by_platform" value="nintendo-switch">Nintendo Switch</button>
 
 				</div>
+
+				<h3>Sort by:</h3>
+				<div class="sort-buttons">
+
+					<button id="sort" value="">Year of Release</button>
+					<button id="sort" value="">Name A-Z</button>
+					<button id="sort" value="">Rating Score</button>
+				</div>
+
+
+				<input class="search" type="text" placeholder="Search for games">
+			
 				<button class="sign-out-button">Sign out</button>
 			</div>
 
