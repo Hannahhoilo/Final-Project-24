@@ -65,6 +65,9 @@ function renderData(videoGames){
 }
  */
 
+import {fetchedGameData} from './app.js'
+
+
 
 function renderData(videoGames){
     const gameList = document.querySelector('.game-list');
@@ -142,39 +145,46 @@ console.log('Games filtered by platform:', filteredByPlatform);
 const genreSelect = document.getElementById('filter_by_genre');
 const platformSelect = document.getElementById('filter_by_platform');
 
-genreSelect.addEventListener('change', () => {
+genreSelect.addEventListener('click', () => {
   const selectedGenre = genreSelect.value;
-  filterByGenre(videoGames, selectedGenre);
+
+  console.log('Selected genre:', selectedGenre);
+
+  filterByGenre(fetchedGameData, selectedGenre);
 });
 
-platformSelect.addEventListener('change', () => {
+platformSelect.addEventListener('click', () => {
   const selectedPlatform = platformSelect.value;
-  filterByPlatform(videoGames, selectedPlatform);
+
+  console.log('Selected platform:', selectedPlatform);
+  filterByPlatform(fetchedGameData, selectedPlatform);
 });
 
 
 
 // Filtering Functions
 
-function filterByGenre(videoGames, genre) {
-	const filteredGames = videoGames.filter(game => {
+function filterByGenre(fetchedGameData, genre) {
+    const filteredGames = fetchedGameData.filter(game => {
+        return game.genres.includes(genre);
+    });
+    console.log('Filtered games by genre:', filteredGames); // Log the filtered games
+    renderData(filteredGames);
+}
+
+/* function filterByGenre(fetchedGameData, genre) {
+	const filteredGames = fetchedGameData.filter(game => {
 	  return game.genres.includes(genre);
 	});
 	renderData(filteredGames);
 	
-  }
+  } */
   
-  function filterByPlatform(videoGames, platform) {
-	const filteredGames = videoGames.filter(game => {
+  function filterByPlatform(fetchedGameData, platform) {
+	const filteredGames = fetchedGameData.filter(game => {
 	  return game.platforms.includes(platform);
 	});
 	renderData(filteredGames);
   }
-
-  console.log(filteredGames, selectedGenre);
-
-
-
-
 
 export default renderData;

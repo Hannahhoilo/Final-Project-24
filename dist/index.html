@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../src/styles/styles.css" />
 	<title>Document</title>
 </head>
+
 <body>
 	<header>
-		<h1>Welcome</h1>
-		<button class="sign-out-button">Sign out</button>
+		<h1>Gameflix</h1>
 	</header>
 
 	<main>
@@ -58,80 +59,82 @@
 		</div>
 
 		<div class="main-content-container">
-<div  class="hello">
-    <div>
-        <label for="filter_by_genre">Select Genre:</label>
-        <select id="filter_by_genre">
-            <option value="">All Genres</option>
-            <option value="action">Action</option>
-			<option value="adventure">Adventure</option>
-            <option value="role-playing-games-rpg">RPG</option>
-			<option value="shooter">Shooter</option>
-			<option value="puzzle">Puzzle</option>
-			<option value="Indie">Indie</option>
-			<option value="platformer">Platformer</option>
-        </select>
-    </div>
-    <div>
-        <label for="filter_by_platform">Select Platform:</label>
-        <select id="filter_by_platform">
-            <option value="">All Platforms</option>
-            <option value="pc">PC</option>
-            <option value="playstation">PlayStation</option>
-            <option value="xbox">Xbox</option>
-			<option value="nintendo-switch">Nintendo Switch</option>
-            
-        </select>
-    </div>
-</div>
+			<div class="sidebar">
+				<h2>Gameflix</h2>
 
+				<h2>Select genre:</h2>
+				<div class="filter-by-genre-buttons">
 
-			<div class="game-list">
-				<ul></ul>
+					<button id="filter_by_genre" value="action">Action</button>
+					<button id="filter_by_genre" value="adventure">Adventure</button>
+					<button id="filter_by_genre" value="role-playing-games-rpg">RPG</button>
+					<button id="filter_by_genre" value="shooter">Shooter</button>
+					<button id="filter_by_genre" value="puzzle">Puzzle</button>
+					<button id="filter_by_genre" value="indie">Indie</button>
+					<button id="filter_by_genre" value="platformer">Platformer</button>
+				</div>
+
+				<h2>Select platform:</h2>
+				<div class="filter-by-platform-buttons">
+
+					<button id="filter_by_platform" value="pc">PC</button>
+					<button id="filter_by_platform" value="playstation">Playstation</button>
+					<button id="filter_by_platform" value="xbox">Xbox</button>
+					<button id="filter_by_platform" value="nintendo-switch">Nintendo Switch</button>
+
+				</div>
+				<button class="sign-out-button">Sign out</button>
 			</div>
 
+			<div class="hello">
+				<div class="game-list-container">
+					<div class="game-list">
+						<ul></ul>
+					</div>
+				</div>
+			</div>
 		</div>
-
 	</main>
 
 	<footer>
-				<!-- Footer start -->
+		<!-- Footer start -->
 
-				<div class="footer">
-					<div class="column-1">
-						<h3>USEFUL LINKS</h3>
-						<a href="****">About</a>
-						<a href="****">Services</a>
-						<a href="****">Contact</a>
-						<a href="****">Blog</a>
-					</div>
-					<div class="column-2">
-						<h3>NEWSLETTER</h3>
-						<form>
-							<input type="email" class="footer-email" placeholder="Your Email Adress" required>
-							<br>
-							<button type="submit" class="footer-button" >SUBSCRIBE NOW</button>
-						</form>
-					</div>
-					<div class="column-3">
-						<h3>CONTACT</h3>
-						<p>Snarøyveien 55, 1364, Fornebu <br> Norway</p>
-						<div class="social-icons">
-							<i class="fab fa-facebook"></i>
-							<i class="fab fa-twitter"></i>
-							<i class="fab fa-instagram"></i>
-							<i class="fab fa-youtube"></i>
-						</div>
-						
-					</div>
+		<div class="footer">
+			<div class="column-1">
+				<h3>USEFUL LINKS</h3>
+				<a href="****">About</a>
+				<a href="****">Services</a>
+				<a href="****">Contact</a>
+				<a href="****">Blog</a>
+			</div>
+			<div class="column-2">
+				<h3>NEWSLETTER</h3>
+				<form>
+					<input type="email" class="footer-email" placeholder="Your Email Adress" required>
+					<br>
+					<button type="submit" class="footer-button">SUBSCRIBE NOW</button>
+				</form>
+			</div>
+			<div class="column-3">
+				<h3>CONTACT</h3>
+				<p>Snarøyveien 55, 1364, Fornebu <br> Norway</p>
+				<div class="social-icons">
+					<i class="fab fa-facebook"></i>
+					<i class="fab fa-twitter"></i>
+					<i class="fab fa-instagram"></i>
+					<i class="fab fa-youtube"></i>
 				</div>
-			
-			<!-- Footer end -->
+
+			</div>
+		</div>
+
+		<!-- Footer end -->
 	</footer>
-	
+
 
 
 	<script src="./bundle.js"></script>
-	
+
 </body>
+
 </html>

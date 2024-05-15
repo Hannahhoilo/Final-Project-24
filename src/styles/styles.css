@@ -149,38 +149,96 @@ main {
 	cursor: pointer;
 }
 
-/* GAMES  */
+/* MAIN PAGE + GAMES  */
+
+.main-content-container {
+    display: flex;
+	
+
+}
 
 .hello {
+	display: flex;
+	flex-basis: 80%;
+	align-items: center;
 
-	position: fixed;
+}
+
+/* SIDEBAR START */
+.sidebar {
+
+	margin-right: auto;
+	
 	top: 5rem;
 	left: 0;
-
-	flex-basis: 10%;
-	height: 50%;
+	
 	display: flex;
+	flex-basis: 20%;
+	height: 100vh;
+	
+	
 	flex-direction: column;
 	gap: 1rem;
 	padding: 1rem;
 	color: #e5f73ede;
+	background: #2a282e;
+	/*
 	background: linear-gradient(to bottom, #322b3b, #453b52);
 
 	border: 1px solid #00fbffde;
     border-radius: 8px;
+	*/
 
 }
 
-.main-content-container {
-    display: flex;
+.filter-by-genre-buttons button {
+	
+	background-color: transparent;
+	flex-direction:column;
+
+	margin: 1rem;
+	border: none;
+	font-weight: bold;
+	font-size: large;
+	cursor: pointer;
+	color: #e5f73ede;
+}
+.filter-by-platform-buttons button {
+	
+	background-color: transparent;
+	border: none;
+	font-weight: bold;
+	font-size: large;
+	cursor: pointer;
+	color: #e5f73ede;
+}
+
+.sign-out-button {
+	background-color: transparent;
+	border: none;
+	font-weight: bolder;
+	font-size: larger;
+	cursor: pointer;
+	color: #27f8ff;
+}
+
+/* SIDEBAR END */
+
+.game-list {
+	display: flex;
 	flex-direction: row;
+    flex-wrap: wrap;
+
+	flex-basis: 100%;
+	
+
+	
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     justify-content: space-between; /* Distribute items evenly with space between them */
 	justify-content: center;
 	gap: 10px;
-	flex-basis: 350px;
-	align-content: flex-start;
 	
+	align-content: flex-start;
 }
 
 
@@ -194,7 +252,7 @@ main {
     margin: 20px;
 	color:#e5f73ede;
 	background: linear-gradient(to bottom, #322b3b, #453b52);
-    max-width: 300px; /* Adjust the maximum width of the game card */
+    max-width: 280px; /* Adjust the maximum width of the game card */
 }
 
 .game-card img {

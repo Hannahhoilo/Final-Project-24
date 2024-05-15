@@ -164,6 +164,12 @@ signInButton.addEventListener('click', (e)=>{
 	signInUser();
 })
 
+// STORE DATA IN MPTY ARRAY
+
+//dataOfGames[] = {data};
+//export const [dataOfGames] = (data);
+let fetchedGameData = [];
+
 /* FETCH GAME DATA FROM API */
 async function fetchData(){
 		const dataExists = await checkDataExists();
@@ -172,9 +178,14 @@ async function fetchData(){
 		const data = await response.json();
 		console.log(data);
 		storeData(data);
+
+		fetchedGameData.push(...data.results);
+		console.log(fetchedGameData)
+
 		renderData(data.results);
 	}
 }
+
 
 fetchData();
 
@@ -192,13 +203,19 @@ async function storeData(data){
 		};
 		console.log(newVideoGame);
 		await addDoc(videoGamesCollection, newVideoGame)
+
+		fetchedGameData.push(newVideoGame);
 	}
 }
+
+
 
 async function checkDataExists(){
 	const snapshot = await getDocs(videoGamesCollection);
 	return !snapshot.empty;
 }
+
+
 
 onAuthStateChanged(authService, (user)=>{
 	if(user){
@@ -217,3 +234,4 @@ onAuthStateChanged(authService, (user)=>{
 	}
 })
 
+export { fetchedGameData };
