@@ -62,7 +62,7 @@ openSignUpFormButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	signUpFormContainer.style.display = 'block'
 })
-//CLOSE SIGN UOUT MODAL
+//CLOSE SIGN OUT MODAL
 closeSignUpFormButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	signUpFormContainer.style.display = 'none'
@@ -171,7 +171,7 @@ signInButton.addEventListener('click', (e)=>{
 
 
 /* FETCH GAME DATA FROM API */
-async function fetchData(){
+/* async function fetchData(){
 		const dataExists = await checkDataExists();
 		if(!dataExists){
 		const response = await fetch('https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f');
@@ -185,16 +185,46 @@ async function fetchData(){
 		renderData(data.results);
 	}
 }
+ */
+
+
+/* ---------- ANNEN FETCH DATA FROM API -------------- */
+
+async function fetchData() {
+    try {
+        const dataExists = await checkDataExists();
+        if (!dataExists) {
+            const response = await fetch('https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f');
+            const data = await response.json();
+
+            // Check if the retrieved data has the expected structure
+            if (Array.isArray(data.results)) {
+                // Push each game object into the fetchedGameData array
+                data.results.forEach(game => {
+                    fetchedGameData.push(game);
+                });
+            } else {
+                console.error('Unexpected data structure from API:', data);
+            }
+
+            renderData(fetchedGameData);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+
 
 /*
-separtert med filter kategotty , med sswitch 
+separtert med filter kategotty , med switch 
 
 når man bruker filter så skal man map gjennom arrayyen på nytt 
 */
 
 fetchData();
 
-/* FILTER */
+/* FILTER + Event listener */
 
 // Event Listeners
 
@@ -228,13 +258,7 @@ function filterByGenre(fetchedGameData, genre) {
     renderData(filteredGames);
 }
 
-/* function filterByGenre(fetchedGameData, genre) {
-	const filteredGames = fetchedGameData.filter(game => {
-	  return game.genres.includes(genre);
-	});
-	renderData(filteredGames);
-	
-  } */
+
   
   function filterByPlatform(fetchedGameData, platform) {
 	const filteredGames = fetchedGameData.filter(game => {
@@ -246,6 +270,37 @@ function filterByGenre(fetchedGameData, genre) {
 
 
 /*------------------------*/
+
+// Search function
+
+/* const searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  const fetchedGameData = fetchedGameData.filter(game => {
+    return game.videoGameName.toLowerCase().includes(searchTerm);
+  });
+  renderData(fetchedGameData);
+});  */
+
+// Search function
+const searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  const fetchedGameData = fetchedGameData.filter(game => {
+    return game.videoGameName.toLowerCase().includes(searchTerm);
+  });
+  renderData(fetchedGameData);
+});
+
+
+
+// ------------------------
+
+
+
+
 
 
 
