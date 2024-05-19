@@ -304,8 +304,8 @@ searchInput.addEventListener('input', () => {
 
 
 
-
-async function storeData(data){
+// gammel lagde ny 29.5 
+/* async function storeData(data){
 	for(let game of data){
 		const newVideoGame = {
 			gameContainer: game.gameContainer.svg,
@@ -314,6 +314,23 @@ async function storeData(data){
 			population: game.population,
 
 			videoGameReleased: game.videoGameReleased,
+		};
+		console.log(newVideoGame);
+		await addDoc(videoGamesCollection, newVideoGame)
+
+		fetchedGameData.push(newVideoGame);
+	}
+}
+ */
+//lagt til 29.05 den over er gammel og funket men prøver å fikse 
+async function storeData(data){
+	for(let game of data.results){
+		const newVideoGame = {
+			videoGameName: game.name,
+			genres: game.genres,
+			platforms: game.platforms,
+			released: game.released,
+			// Add more properties as needed
 		};
 		console.log(newVideoGame);
 		await addDoc(videoGamesCollection, newVideoGame)
