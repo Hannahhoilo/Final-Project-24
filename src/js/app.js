@@ -24,7 +24,17 @@ import {validateSignInForm} from './signInValidation';
 import {validateSignUpForm} from './signUpValidation';
 import renderData from './renderData';
 
-let fetchedGameData = [];
+let fetchedGameData = []; 
+
+
+/* let fetchedGameData; // Declaration
+// Initialize fetchedGameData with some value
+fetchedGameData = fetchData(); // Example function to fetch data
+
+// Now you can safely use fetchedGameData
+console.log(fetchedGameData); */
+
+
 
 /* SELECTING THE SIGN IN FORM ELEMENTS */
 const emailInput = document.querySelector('.email');
@@ -208,6 +218,7 @@ async function fetchData() {
             }
 
             renderData(fetchedGameData);
+			console.log(fetchedGameData);
         }
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -256,7 +267,10 @@ function filterByGenre(fetchedGameData, genre) {
     });
     console.log('Filtered games by genre:', filteredGames); // Log the filtered games
     renderData(filteredGames);
+
 }
+
+
 
 
   
@@ -289,7 +303,7 @@ const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', () => {
   const searchTerm = searchInput.value.toLowerCase();
   const fetchedGameData = fetchedGameData.filter(game => {
-    return game.videoGameName.toLowerCase().includes(searchTerm);
+    return game.name.toLowerCase().includes(searchTerm);
   });
   renderData(fetchedGameData);
 });
@@ -297,8 +311,42 @@ searchInput.addEventListener('input', () => {
 
 
 // ------------------------
+//20.5
 
+/* searchGame.addEventListener("input", (e) => {
+    let value = e.target.value
 
+    if (value && value.trim().length > 0){
+         value = value.trim().toLowerCase()
+
+        //returning only the results of setList if the value of the search is included in the person's name
+        setList(fetchedGameData.filter(game => {
+            return game.name.includes(value)
+        })))
+
+const searchInput = document.querySelector('.searchInput')
+
+// creating and declaring a function called "setList"
+// setList takes in a param of "results"
+function setList(results){
+
+    for (const game of results){
+        // creating a li element for each result item
+        const resultItem = document.createElement('li')
+
+        // adding a class to each item of the results
+        resultItem.classList.add('result-item')
+
+        // grabbing the name of the current point of the loop and adding the name as the list item's text
+        const text = document.createTextNode(game.name)
+
+        // appending the text to the result item
+        resultItem.appendChild(text)
+
+        // appending the result item to the list
+        list.appendChild(resultItem)
+    }
+} */
 
 
 
