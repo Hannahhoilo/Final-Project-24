@@ -27,13 +27,6 @@ import renderData from './renderData';
 let fetchedGameData = []; 
 
 
-/* let fetchedGameData; // Declaration
-// Initialize fetchedGameData with some value
-fetchedGameData = fetchData(); // Example function to fetch data
-
-// Now you can safely use fetchedGameData
-console.log(fetchedGameData); */
-
 
 
 /* SELECTING THE SIGN IN FORM ELEMENTS */
@@ -178,31 +171,9 @@ signInButton.addEventListener('click', (e)=>{
 	signInUser();
 })
 
-// STORE DATA IN MPTY ARRAY
-
-//dataOfGames[] = {data};
-//export const [dataOfGames] = (data);
 
 
-/* FETCH GAME DATA FROM API */
-/* async function fetchData(){
-		const dataExists = await checkDataExists();
-		if(!dataExists){
-		const response = await fetch('https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f');
-		const data = await response.json();
-
-		storeData(data);
-
-		fetchedGameData.push(...data.results);
-		console.log(fetchedGameData)
-
-		renderData(data.results);
-	}
-}
- */
-
-
-/* ---------- ANNEN FETCH DATA FROM API -------------- */
+/* ----------  FETCH DATA FROM API -------------- */
 
 async function fetchData() {
     try {
@@ -215,16 +186,8 @@ async function fetchData() {
 				// Call your function here
 				filterByGenre(genre);
 			}) */
-			
-            // Check if the retrieved data has the expected structure
-           /*  if (Array.isArray(data.results)) {
-                // Push each game object into the fetchedGameData array
-                data.results.forEach(game => {
-                    fetchedGameData.push(game);
-                });
-            } else {
-                console.error('Unexpected data structure from API:', data);
-            } */
+
+            
 
             renderData(data.results);
 			console.log(data.results);
@@ -378,6 +341,7 @@ function setList(results){
 }
  */
 //lagt til 29.05 den over er gammel og funket men prøver å fikse 
+
 async function storeData(data){
 	for(let game of data.results){
 		const newVideoGame = {
@@ -393,8 +357,6 @@ async function storeData(data){
 		fetchedGameData.push(newVideoGame);
 	}
 }
-
-
 
 async function checkDataExists(){
 	const snapshot = await getDocs(videoGamesCollection);
