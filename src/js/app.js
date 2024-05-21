@@ -45,6 +45,8 @@ const passwordError = document.querySelector('.password-error');
 const signInForm = document.querySelector('.sign-in-form');
 const submissionError = document.querySelector('.submission-error');
 
+const welcomeHeaderAndText = document.querySelector('.welcome');
+
 /* SELECTING SIGN UP FORM ELEMENTS */
 const signUpFirstname = document.querySelector('.firstname');
 const signUpLastname = document.querySelector('.lastname');
@@ -134,6 +136,8 @@ function singOutUser(){
 		console.log('Signed out successfully');
 		signOutButton.style.visibility = 'hidden';
 		signInForm.style.display = 'flex';
+
+		welcomeHeaderAndText.style = 'flex';
 	})
 	.catch((err)=> console.log('error'))
 }
@@ -403,6 +407,7 @@ onAuthStateChanged(authService, (user)=>{
 			renderData(snapshot.docs);
 			signOutButton.style.visibility = 'visible';
 			signInForm.style.display = 'none';
+			welcomeHeaderAndText.style.display = 'none';
 			signUpFormContainer.style.display = 'none';
 			mainContentContainer.style.display = 'flex';
 		})
@@ -410,6 +415,7 @@ onAuthStateChanged(authService, (user)=>{
 		mainContentContainer.style.display = 'none';
 		signOutButton.style.visibility = 'hidden';
 		signInForm.style.display = 'flex';
+		welcomeHeaderAndText.style.display = 'flex';
 	}
 })
 

@@ -1,0 +1,339 @@
+/*  {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+	width: 100%;
+	height: 100vh;
+	background-color: #392529;
+	background: linear-gradient(to bottom, #392529, #d82f51);
+	/*
+	color: #ff7ffd;
+	background-color: #0f1035;
+	*/
+
+
+header {
+	height: 10%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 2rem;
+	color: #27f8ff;
+}
+
+main {
+	height: 80%;
+	position: relative;
+	/*
+	background-color: #0f1035; */
+/* 	background-color: #392529;
+	background: linear-gradient(to bottom, #392529, #d82f51); */
+}
+
+
+
+/* ----------SIGN IN-------------- */
+
+.sign-in-form {
+	width: 30%;
+	height: 70%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 0.5rem;
+	border: solid 2px #27f8ff;
+	background: linear-gradient(to bottom, #497c86, #61e5ff);
+}
+
+.email, .password {
+	height: 2rem;
+	border: none;
+	border-radius: 5px;
+}
+
+.sign-in-button {
+	width: 8rem;
+	height: 2rem;
+	border: none;
+	border-radius: 5px;
+}
+
+.email-error, .password-error, .submission-error, .sign-up-error {
+	visibility: hidden;
+}
+
+.sign-up-form__open {
+	background-color: transparent;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+	color: #e5f73ede;
+}
+
+/*---------------SIGN UP-----------------*/
+
+.sign-up-form-container {
+	width: 60%;
+	height: 80%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 0.5rem;
+	display: none;
+	background-color: lightblue;
+}
+
+.sign-up-form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 0 1rem;
+}
+
+.sign-up-form input {
+	width: 20rem;
+	height: 2rem;
+	border: none;
+	border-radius: 5px;
+}
+
+.sign-up-button {
+	width: 12rem;
+	height: 2rem;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+}
+
+.close-sign-up-container {
+	padding: 1rem;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.sign-up-form__close {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+/* MAIN PAGE + GAMES  */
+
+.main-content-container {
+    display: flex;
+	
+
+}
+
+.hello {
+	display: flex;
+	flex-basis: 80%;
+	align-items: center;
+
+}
+
+/* SIDEBAR START */
+.sidebar {
+
+	margin-right: auto;
+	
+	top: 5rem;
+	left: 0;
+	
+	display: flex;
+	flex-basis: 20%;
+	height: 100vh;
+	
+	flex-wrap: wrap;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem;
+	color: #e5f73ede;
+	background: #2a282e;
+	/*
+	background: linear-gradient(to bottom, #322b3b, #453b52);
+
+	border: 1px solid #00fbffde;
+    border-radius: 8px;
+	*/
+
+}
+
+.filter-by-genre-buttons button {
+	
+	background-color: transparent;
+	flex-direction:column;
+
+	margin: 1rem;
+	border: none;
+	font-weight: bold;
+	font-size: large;
+	cursor: pointer;
+	color: #e5f73ede;
+}
+
+.filter-by-platform-buttons button {
+	
+	background-color: transparent;
+	border: none;
+	font-weight: bold;
+	font-size: large;
+	cursor: pointer;
+	color: #e5f73ede;
+}
+
+.sort-buttons button {
+	background-color: transparent;
+	border: none;
+	font-weight: bold;
+	font-size: large;
+	cursor: pointer;
+	color: #e5f73ede;
+}
+
+.searchInput {
+	height: 2rem;
+	border:solid 2px #27f8ff;
+	border-radius: 5px;
+}
+
+.sign-out-button {
+	background-color: transparent;
+	border: none;
+	font-weight: bolder;
+	font-size: larger;
+	cursor: pointer;
+	color: #27f8ff;
+}
+
+/* SIDEBAR END */
+
+.game-list {
+	display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+
+	flex-basis: 100%;
+	
+
+	
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Distribute items evenly with space between them */
+	justify-content: center;
+	gap: 10px;
+	margin-top: 2rem;
+	
+	align-content: flex-start;
+}
+
+
+.game-card {
+	align-content: flex-start;
+	flex-direction: row;
+    border: 1px solid #00fbffde;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+	color:#e5f73ede;
+	background: linear-gradient(to bottom, #322b3b, #453b52);
+    max-width: 280px; /* Adjust the maximum width of the game card */
+}
+
+.game-card img {
+    max-width: 100%; /* Ensure the game image fits within the game card */
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.game-card h3 {
+    font-size: 18px;
+	font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.game-card p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+
+/* Footer start */
+
+.footer {
+	margin-top: 150px;
+	width: 100%;
+	padding: 100px 0;
+	background: #2a282e;
+	color: #61e5ff;
+	display: flex;
+}
+
+.footer div {
+	text-align: center;
+	width:33%;
+}
+
+.column-2 {
+	flex-grow: 2;
+}
+
+.footer div h3 {
+	font-weight: 300;
+	margin-bottom: 30px;
+	letter-spacing: 1px;
+}
+
+.column-1 a{
+	display: block;
+	text-decoration: none;
+	color: #fff48fde;
+	margin-bottom: 10px;
+}
+
+.footer-email {
+	width: 400px;
+	height: 45px;
+	border-radius: 4px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 40px;
+	outline: none;
+	border: none;
+}
+
+.footer-button {
+	background: transparent;
+	border: 2px, solid, #61e5ff;
+	color: #61e5ff;
+	border-radius: 30px;
+	padding: 10px 30px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.social-icons {
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	min-width:100%;
+}
+.social-icons i {
+	font-size: 22px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+/* Footer end */ */
