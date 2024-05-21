@@ -206,24 +206,29 @@ signInButton.addEventListener('click', (e)=>{
 
 async function fetchData() {
     try {
-        const dataExists = await checkDataExists();
-        if (!dataExists) {
+
             const response = await fetch('https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f');
             const data = await response.json();
+			console.log(data);
 
+			/* .then(genre => {
+				// Call your function here
+				filterByGenre(genre);
+			}) */
+			
             // Check if the retrieved data has the expected structure
-            if (Array.isArray(data.results)) {
+           /*  if (Array.isArray(data.results)) {
                 // Push each game object into the fetchedGameData array
                 data.results.forEach(game => {
                     fetchedGameData.push(game);
                 });
             } else {
                 console.error('Unexpected data structure from API:', data);
-            }
+            } */
 
-            renderData(fetchedGameData);
-			console.log(fetchedGameData);
-        }
+            renderData(data.results);
+			console.log(data.results);
+        
     } catch (error) {
         console.error('Error fetching data:', error);
     }
@@ -260,8 +265,6 @@ platformSelect.addEventListener('click', () => {
   console.log('Selected platform:', selectedPlatform);
   filterByPlatform(fetchedGameData, selectedPlatform);
 });
-
-
 
 // Filtering Functions
 

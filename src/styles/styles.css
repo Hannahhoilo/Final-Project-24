@@ -37,11 +37,11 @@
     height: auto; /* Adjust height automatically based on content */
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    padding: 1rem; /* Adjust padding as needed */
+    padding: 1rem; 
     color: #27f8ff;
-    background-color: #2a282e; /* Add background color for better visibility */
-    border: solid 2px #61e5ff; /* Add border for better visibility */
-    border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+    background-color: #2a282e; 
+    border: solid 2px #61e5ff; 
+    border-radius: 8px; 
 }
 
 .welcome p {
@@ -69,7 +69,9 @@
 	transform: translate(-50%, -50%);
 	border-radius: 0.5rem;
 	border: solid 2px #27f8ff;
-	background: linear-gradient(to bottom, #497c86, #61e5ff);
+	color: #27f8ff;
+    background-color: #2a282e; 
+    
   }
   
   .email, .password {
@@ -83,6 +85,10 @@
 	height: 2rem;
 	border: none;
 	border-radius: 5px;
+	background: transparent;
+	border: 2px solid #61e5ff;
+	color: #61e5ff;
+	margin-bottom: 1rem;
   }
   
   .email-error, .password-error, .submission-error, .sign-up-error {
@@ -108,7 +114,8 @@
 	transform: translate(-50%, -50%);
 	border-radius: 0.5rem;
 	display: none;
-	background-color: lightblue;
+	border: solid 2px #27f8ff;
+	background: linear-gradient(to bottom, #497c86, #61e5ff);
   }
   
   .sign-up-form {
@@ -353,14 +360,20 @@
   }
   
   .footer-button {
-	background: transparent;
-	border: 2px solid #61e5ff;
-	color: #61e5ff;
+
 	border-radius: 30px;
 	padding: 10px 30px;
 	font-size: 10px;
 	cursor: pointer;
 	margin: 0 auto;
+
+	width: 8rem;
+	height: 2rem;
+	border: none;
+	border-radius: 5px;
+	background: transparent;
+	border: 2px solid #61e5ff;
+	color: #61e5ff;
   }
   
   .social-icons {
