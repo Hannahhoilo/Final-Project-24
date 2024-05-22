@@ -111,6 +111,8 @@ function renderData(videoGames){
 		gameCard.appendChild(videoGamePublishers);
 
         gameList.appendChild(gameCard);
+
+		
     });
 }
 

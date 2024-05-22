@@ -71,7 +71,24 @@ closeSignUpFormButton.addEventListener("click", (e) => {
   e.preventDefault();
   signUpFormContainer.style.display = "none";
 });
+/*
+signInButton.addEventListener('click', (e)=>{
+	e.preventDefault ();
 
+	validateSignInForm(
+		emailInput.value,
+		passwordInput.value,
+		emailError,
+		passwordError
+	);
+});
+*/
+/*
+signUpButton.addEventListener('click', (e)=> {
+	e.preventDefault();
+	validateSignUpForm(signUpFirstname.value, signUpLastname.value, signUpEmail.value, signUpPassword.value, signUpError)
+})
+*/
 /* 	SIGN UP USER ACTION */
 function signUpUser() {
   const { signUpErrorStatus } = validateSignUpForm(
@@ -166,59 +183,166 @@ async function fetchData() {
     const data = await response.json();
     console.log(data);
 
-    // Store the fetched data
-    fetchedGameData = data.results;
 
-    // event listeners after data is fetched
-    const genreSelect = document.getElementById("filter_by_genre");
-    const platformSelect = document.getElementById("filter_by_platform");
 
-    genreSelect.addEventListener("click", () => {
-      const selectedGenre = genreSelect.value;
-      console.log("Selected genre:", selectedGenre);
-      filterByGenre(fetchedGameData, selectedGenre);
-    });
+    /* 			filterByGenre.then(genre => {
+				// Call your function here
+				filterByGenre(genre);
+			}) 
+ */
 
-    platformSelect.addEventListener("click", () => {
-      const selectedPlatform = platformSelect.value;
-      console.log("Selected platform:", selectedPlatform);
-      filterByPlatform(fetchedGameData, selectedPlatform);
-    });
-
-    // Filtering Functions
-    function filterByGenre(games, genre) {
-      const filteredGames = games.filter((game) => {
-        // Ensure genres exist and check for matching genre
-        return game.genres.some((g) => g.name.toLowerCase() === genre.toLowerCase());
-      });
-      console.log("Filtered games by genre:", filteredGames); // Log the filtered games
-      renderData(filteredGames);
-    }
-
-    function filterByPlatform(games, platform) {
-      const filteredGames = games.filter((game) => {
-        // Ensure platforms exist and check for matching platform
-        return game.platforms.some((p) => p.platform.name.toLowerCase() === platform.toLowerCase());
-      });
-      console.log("Filtered games by platform:", filteredGames); // Log the filtered games
-      renderData(filteredGames);
-    }
-
-    // Initial render of fetched data
-    renderData(fetchedGameData);
+    renderData(data.results);
+    console.log(data.results);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
 
-// Fetch data when the page loads
+/*
+separtert med filter kategotty , med switch 
+
+når man bruker filter så skal man map gjennom arrayyen på nytt 
+*/
+
 fetchData();
 
-/* Handle auth state changes */
+/* /* FILTER + Event listener */
+
+// Event Listeners
+
+const genreSelect = document.getElementById('filter_by_genre');
+const platformSelect = document.getElementById('filter_by_platform');
+
+genreSelect.addEventListener('click', () => {
+  const selectedGenre = genreSelect.value;
+
+  console.log('Selected genre:', selectedGenre);
+
+  filterByGenre(fetchedGameData, selectedGenre);
+});
+
+platformSelect.addEventListener('click', () => {
+  const selectedPlatform = platformSelect.value;
+
+  console.log('Selected platform:', selectedPlatform);
+  filterByPlatform(fetchedGameData, selectedPlatform);
+});
+
+// Filtering Functions
+
+function filterByGenre(fetchedGameData, genres) {
+    const filteredGames = fetchedGameData.filter(game => {
+        return game.genres.includes(genres);
+    });
+    console.log('Filtered games by genre:', filteredGames); // Log the filtered games
+    renderData(filteredGames);
+
+}
+  
+  function filterByPlatform(fetchedGameData, platform) {
+	const filteredGames = fetchedGameData.filter(game => {
+	  return game.platforms.includes(platform);
+	});
+	renderData(filteredGames);
+  } 
+ 
+
+/*------------------------*/
+
+// Search function
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  const fetchedGameData = fetchedGameData.filter((game) => {
+    return game.name.toLowerCase().includes(searchTerm);
+  });
+  renderData(fetchedGameData);
+});
+
+// ------------------------
+//20.5
+
+/* searchGame.addEventListener("input", (e) => {
+    let value = e.target.value
+
+    if (value && value.trim().length > 0){
+         value = value.trim().toLowerCase()
+
+        //returning only the results of setList if the value of the search is included in the person's name
+        setList(fetchedGameData.filter(game => {
+            return game.name.includes(value)
+        })))
+
+const searchInput = document.querySelector('.searchInput')
+
+// creating and declaring a function called "setList"
+// setList takes in a param of "results"
+function setList(results){
+
+    for (const game of results){
+        // creating a li element for each result item
+        const resultItem = document.createElement('li')
+
+        // adding a class to each item of the results
+        resultItem.classList.add('result-item')
+
+        // grabbing the name of the current point of the loop and adding the name as the list item's text
+        const text = document.createTextNode(game.name)
+
+        // appending the text to the result item
+        resultItem.appendChild(text)
+
+        // appending the result item to the list
+        list.appendChild(resultItem)
+    }
+} */
+
+// gammel lagde ny 29.5
+/* async function storeData(data){
+	for(let game of data){
+		const newVideoGame = {
+			gameContainer: game.gameContainer.svg,
+			videoGameName: game.name,
+			parent_platforms: game.parent_platforms,
+			released: game.released,
+
+			videoGameReleased: game.videoGameReleased,
+		};
+		console.log(newVideoGame);
+		await addDoc(videoGamesCollection, newVideoGame)
+
+		fetchedGameData.push(newVideoGame);
+	}
+}
+ */
+//lagt til 29.05 den over er gammel og funket men prøver å fikse
+
+async function storeData(data) {
+  for (let game of data.results) {
+    const newVideoGame = {
+      videoGameName: game.name,
+      genres: game.genres,
+      platforms: game.platforms,
+      released: game.released,
+      // legg til flere hvis det trengs
+    };
+    console.log(newVideoGame);
+    await addDoc(videoGamesCollection, newVideoGame);
+
+    fetchedGameData.push(newVideoGame);
+  }
+}
+
+async function checkDataExists() {
+  const snapshot = await getDocs(videoGamesCollection);
+  return !snapshot.empty;
+}
+
 onAuthStateChanged(authService, (user) => {
   if (user) {
     getDocs(videoGamesCollection).then((snapshot) => {
-      renderData(snapshot.docs.map(doc => doc.data())); // Correctly pass the data
+      renderData(snapshot.docs);
       signOutButton.style.visibility = "visible";
       signInForm.style.display = "none";
       welcomeHeaderAndText.style.display = "none";
@@ -232,3 +356,5 @@ onAuthStateChanged(authService, (user) => {
     welcomeHeaderAndText.style.display = "flex";
   }
 });
+
+export { fetchedGameData };

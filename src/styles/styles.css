@@ -33,45 +33,83 @@
 
   .welcome {
     margin: 2rem left; /* Center horizontally and add margin */
+	margin-top: 3rem;
+	margin-left: 3rem;
     width: 20%; /* Adjust the width as needed */
     height: auto; /* Adjust height automatically based on content */
     display: flex;
     flex-direction: column; /* Stack children vertically */
     padding: 1rem; 
-    color: #27f8ff;
-    background-color: #2a282e; 
+/*     background-color: #2a282e; 
     border: solid 2px #61e5ff; 
-    border-radius: 8px; 
+    border-radius: 8px;  */
 }
 
-.welcome p {
-    margin-top: 1rem; /* Add margin to separate from the h2 */
-}
-
-.welcome h2 {
-    font-size: larger; /* Correct property for font size */
+.welcome h1 {
     font-weight: bolder;
     color: #e5f73ede;
 }
+
+.welcome h3 {
+    margin-top: 1rem; 
+	color: #27f8ff;
+}
+@media only screen and (max-width: 1000px) {
+	.welcome {
+	  padding: 0.8rem;
+	  font-size: small;
+	  flex-direction: column;
+	  margin: 2rem;
+	  width: 80%;
+	}
+  }
+  
+  @media only screen and (max-width: 700px) {
+	.welcome {
+	  padding: 0.5rem;
+	  font-size: smaller;
+	  flex-direction: column;
+	  margin: 2rem;
+	  width: 80%;
+
+	}
+  }
   
   /* ----------SIGN IN-------------- */
   
   .sign-in-form {
 	width: 30%;
-	height: 70%;
+	height: 18rem;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	padding: 1rem;
 	position: absolute;
-	top: 50%;
+	top: 30%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 0.5rem;
 	border: solid 2px #27f8ff;
 	color: #27f8ff;
     background-color: #2a282e; 
-    
+  }
+
+  @media only screen and (max-width: 1000px) {
+	.sign-in-form {
+	  padding: 0.8rem;
+	  font-size: small;
+	  width: fit-content;
+	  height: 15rem;
+	}
+  }
+  
+  @media only screen and (max-width: 700px) {
+	.sign-in-form {
+	  padding: 0.4rem;
+	  font-size: smaller;
+	  width: fit-content;
+	  height: 15rem;
+	}
   }
   
   .email, .password {
@@ -106,7 +144,7 @@
   /*---------------SIGN UP-----------------*/
   
   .sign-up-form-container {
-	width: 60%;
+/* 	width: 60%;
 	height: 80%;
 	position: absolute;
 	top: 50%;
@@ -115,7 +153,22 @@
 	border-radius: 0.5rem;
 	display: none;
 	border: solid 2px #27f8ff;
-	background: linear-gradient(to bottom, #497c86, #61e5ff);
+	background: linear-gradient(to bottom, #497c86, #61e5ff); */
+	width: 35%;
+	height: 25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1rem;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 0.5rem;
+	border: solid 2px #27f8ff;
+	color: #e5f73ede;
+    background-color: #2a282e; 
+	display: none;
   }
   
   .sign-up-form {
@@ -126,29 +179,40 @@
   }
   
   .sign-up-form input {
-	width: 20rem;
+/* 	width: 20rem;
+	height: 2rem;
+	border: none;
+	border-radius: 5px; */
 	height: 2rem;
 	border: none;
 	border-radius: 5px;
   }
   
   .sign-up-button {
-	width: 12rem;
+/* 	width: 12rem;
 	height: 2rem;
 	cursor: pointer;
 	border: none;
+	border-radius: 5px; */
+	width: 8rem;
+	height: 2rem;
+	border: none;
 	border-radius: 5px;
+	background: transparent;
+	border: 2px solid #61e5ff;
+	color: #61e5ff;
+	margin-bottom: 1rem;
   }
   
   .close-sign-up-container {
-	padding: 1rem;
+	padding: 0.3rem;
 	display: flex;
 	justify-content: flex-end;
   }
   
   .sign-up-form__close {
-	width: 2rem;
-	height: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	border-radius: 50px;
 	cursor: pointer;
   }
