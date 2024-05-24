@@ -294,7 +294,7 @@ function sortByRelease (data){
 add eventlistener 
 insted of data . slice . sort you use data . slice . filter  */
 
-// --------- Filter Genres -----------------------
+// --------------------------- Filter Genres ---------------------------------
 // Action
 filterByActionButton.addEventListener("click", ()=>{
 	const filterAction = filterByAction(fetchedGameData)
@@ -356,10 +356,16 @@ function filterByIndie(data){
 }
 
 // Platformer
-filterByPlatformerButton
+filterByPlatformerButton.addEventListener("click", ()=>{
+	const filterPlatformer = filterByPlatformer(fetchedGameData)
+	console.log(filterPlatformer);
+	renderData(filterPlatformer);
+})
+function filterByPlatformer(data){
+	return data.filter(game => game.genres.some(genre => genre.slug === 'platformer'));
+}
 
-
-// ------------------------ Filter game consoles ----------------------
+// -------------------------------- Filter game consoles ---------------------------------
 // PC
 filterByPcButton.addEventListener("click", ()=>{
 	const filterPc = filterByPc(fetchedGameData)
