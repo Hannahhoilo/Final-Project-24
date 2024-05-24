@@ -295,7 +295,7 @@ add eventlistener
 insted of data . slice . sort you use data . slice . filter  */
 
 // --------- Filter Genres -----------------------
-//Action
+// Action
 filterByActionButton.addEventListener("click", ()=>{
 	const filterAction = filterByAction(fetchedGameData)
 	console.log(filterAction);
@@ -305,6 +305,8 @@ function filterByAction(data) {
 	return data.filter(game => game.genres.some(genre => genre.slug === 'action'));	
 }
 
+// Adventure 
+filterByAdventureButton
 
 // --------- Filter game consoles ----------------------
 // PC
