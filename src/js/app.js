@@ -325,6 +325,9 @@ function filterByRPG (data) {
 	return data.filter(game => game.genres.some(genre => genre.slug === 'role-playing-games-rpg'));
 }
 
+// Shooter
+filterByShooterButton
+
 // ------------------------ Filter game consoles ----------------------
 // PC
 filterByPcButton.addEventListener("click", ()=>{
