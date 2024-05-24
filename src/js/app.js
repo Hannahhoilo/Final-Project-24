@@ -315,6 +315,9 @@ function filterByAdventure(data) {
 	return data.filter(game => game.genres.some(genre => genre.slug === 'adventure'));
 }
 
+// RPG
+filterByRPGButton
+
 // --------- Filter game consoles ----------------------
 // PC
 filterByPcButton.addEventListener("click", ()=>{
