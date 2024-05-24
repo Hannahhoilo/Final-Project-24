@@ -316,9 +316,16 @@ function filterByAdventure(data) {
 }
 
 // RPG
-filterByRPGButton
+filterByRPGButton.addEventListener("click", ()=> {
+	const filterRPG = filterByRPG(fetchedGameData)
+	console.log(filterRPG);
+	renderData(filterRPG);
+})
+function filterByRPG (data) {
+	return data.filter(game => game.genres.some(genre => genre.slug === 'role-playing-games-rpg'));
+}
 
-// --------- Filter game consoles ----------------------
+// ------------------------ Filter game consoles ----------------------
 // PC
 filterByPcButton.addEventListener("click", ()=>{
 	const filterPc = filterByPc(fetchedGameData)
