@@ -334,9 +334,6 @@ filterByShooterButton.addEventListener("click", ()=>{
 function filterByShooter(data) {
 	return data.filter(game => game.genres.some(genre => genre.slug === 'shooter'));
 }
-/*
-const filterByIndieButton = document.querySelector("#filter-indie");
-const filterByPlatformerButton */
 
 // Puzzle
 filterByPuzzleButton.addEventListener("click", ()=>{
@@ -357,6 +354,9 @@ filterByIndieButton.addEventListener("click", ()=>{
 function filterByIndie(data){
 	return data.filter(game => game.genres.some(genre => genre.slug === 'indie'));
 }
+
+// Platformer
+filterByPlatformerButton
 
 
 // ------------------------ Filter game consoles ----------------------
