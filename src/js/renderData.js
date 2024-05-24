@@ -69,10 +69,12 @@ function renderData(videoGames){
 
 console.log("from render", fetchedGameData); */
 
-function renderData(videoGames){
+ function renderData(videoGames){
     const gameList = document.querySelector('.game-list');
-
-    videoGames.forEach(videoGame => {
+	gameList.textContent = ''
+console.log(videoGames);
+     videoGames.forEach((videoGame) => {
+		
         const gameCard = document.createElement('div');
         gameCard.classList.add('game-card');
 
@@ -112,7 +114,7 @@ function renderData(videoGames){
 
         gameList.appendChild(gameCard);
 
-		
+
     });
 }
 

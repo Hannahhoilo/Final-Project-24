@@ -51,6 +51,12 @@ const openSignUpFormButton = document.querySelector(".sign-up-form__open");
 const signUpFormContainer = document.querySelector(".sign-up-form-container");
 const signUpButton = document.querySelector(".sign-up-button");
 
+// Selecting the sort buttons
+const sortByReleaseButton = document.querySelector("#sort-release");
+const sortByNameButton = document.querySelector("#sort-name");
+const sortByRatingButton = document.querySelector("#sort-rating");
+
+
 const gameList = document.querySelector(".game-list");
 const url = `https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f`;
 
@@ -164,13 +170,13 @@ async function fetchData() {
       "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f"
     );
     const data = await response.json();
-    console.log(data);
-
+	
     // Store the fetched data
-    fetchedGameData = data.results;
+    fetchedGameData = [...data.results];
+    console.log(fetchedGameData);
 
     // event listeners after data is fetched
-    const genreSelect = document.getElementById("filter_by_genre");
+    /* const genreSelect = document.getElementById("filter_by_genre");
     const platformSelect = document.getElementById("filter_by_platform");
 
     genreSelect.addEventListener("click", () => {
@@ -202,10 +208,10 @@ async function fetchData() {
       });
       console.log("Filtered games by platform:", filteredGames); // Log the filtered games
       renderData(filteredGames);
-    }
+    } */
 
     // Initial render of fetched data
-    renderData(fetchedGameData);
+   /*  renderData(fetchedGameData); */
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -215,16 +221,15 @@ async function fetchData() {
 fetchData();
 
 /* Handle auth state changes */
-onAuthStateChanged(authService, (user) => {
+onAuthStateChanged(authService, async (user) => {
   if (user) {
-    getDocs(videoGamesCollection).then((snapshot) => {
-      renderData(snapshot.docs.map(doc => doc.data())); // Correctly pass the data
+	  await renderData(fetchedGameData);  
       signOutButton.style.visibility = "visible";
       signInForm.style.display = "none";
       welcomeHeaderAndText.style.display = "none";
       signUpFormContainer.style.display = "none";
       mainContentContainer.style.display = "flex";
-    });
+   
   } else {
     mainContentContainer.style.display = "none";
     signOutButton.style.visibility = "hidden";
@@ -232,3 +237,39 @@ onAuthStateChanged(authService, (user) => {
     welcomeHeaderAndText.style.display = "flex";
   }
 });
+
+// Sorting the games 
+sortByRatingButton.addEventListener("click",async ()=>{
+	const sortedRatings = await sortByRating(fetchedGameData)
+	console.log(sortedRatings);
+	renderData(sortedRatings)
+})
+
+function sortByRating (data){
+	return data.slice().sort((a,b)=> b.rating - a.rating)
+}
+
+//sort the names
+sortByNameButton.addEventListener("click", ()=>{
+	const sortedNames = sortByName(fetchedGameData)
+	console.log(sortedNames);
+	renderData(sortedNames);
+})
+
+function sortByName (data){
+	return data.slice().sort((a,b)=> a.name.localeCompare(b.name))
+}
+
+// sort by release
+sortByReleaseButton.addEventListener("click", ()=>{
+	const sortedRelease = sortByRelease(fetchedGameData)
+	console.log(sortedRelease);
+	renderData(sortedRelease);
+})
+
+function sortByRelease (data){
+		return data.slice().sort((a,b)=>{		
+			return Number(a.released.slice(0,4)) - Number(b.released.slice(0,4))
+		})
+	
+}
