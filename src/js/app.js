@@ -51,8 +51,16 @@ const openSignUpFormButton = document.querySelector(".sign-up-form__open");
 const signUpFormContainer = document.querySelector(".sign-up-form-container");
 const signUpButton = document.querySelector(".sign-up-button");
 
+// Selecting the filter for genre buttons 
+const filterByActionButton = document.querySelector("#filter-action");
+const filterByAdventureButton = document.querySelector("#filter-adventure");
+const filterByRPGButton = document.querySelector("#filter-rpg");
+const filterByShooterButton = document.querySelector("#filter-shooter");
+const filterByPuzzleButton = document.querySelector("#filter-puzzle");
+const filterByIndieButton = document.querySelector("#filter-indie");
+const filterByPlatformerButton = document.querySelector("#filter-platformer");
 
-// Selecting the filter buttons 
+// Selecting the filter for consoles buttons 
 const filterByPcButton = document.querySelector("#filter-pc");
 const filterByPlaystationButton = document.querySelector("#filter-playstation");
 const filterByXboxButton = document.querySelector("#filter-xbox");
@@ -245,6 +253,7 @@ onAuthStateChanged(authService, async (user) => {
   }
 });
 
+// --------------------------------------------
 // Sorting the games 
 sortByRatingButton.addEventListener("click",async ()=>{
 	const sortedRatings = await sortByRating(fetchedGameData)
@@ -285,6 +294,17 @@ function sortByRelease (data){
 add eventlistener 
 insted of data . slice . sort you use data . slice . filter  */
 
+// --------- Filter Genres -----------------------
+//Action
+filterByActionButton.addEventListener("click", ()=>{
+	const filterAction = filterByAction(fetchedGameData)
+	console.log(filterAction);
+	renderData(filterAction);
+})
+function filterByAction(data) {
+	return data.filter(game => game.genres.some(genre => genre.slug === 'action'));	
+}
+
 
 // --------- Filter game consoles ----------------------
 // PC
@@ -293,14 +313,12 @@ filterByPcButton.addEventListener("click", ()=>{
 	console.log(filterPc);
 	renderData(filterPc);
 })
-/* function filterByPc (data){
-	data.slice().filter()
-} */
 function filterByPc(data) {
 	return data.slice().filter(game => 
 		game.platforms.some(platform => platform.platform.slug === 'pc' || platform.platform.name.toLowerCase() === 'pc')
 	);
 }
+
 // Playstation 
 filterByPlaystationButton.addEventListener("click", ()=>{
 	const filterPlaystation = filterByPlaystation(fetchedGameData)
@@ -335,3 +353,5 @@ function filterByNintendo(data) {
 	return data.slice().filter(game =>
 		game.parent_platforms.some(platform => platform.slug === 'nintendo' || platform.platform.name.toLowerCase() === 'nintendo'))
 }
+
+// -----------------------------------------
