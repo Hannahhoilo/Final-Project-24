@@ -348,6 +348,16 @@ function filterByPuzzle(data) {
 	return data.filter(game => game.genres.some(genre => genre.slug === 'puzzle'));
 }
 
+// Indie
+filterByIndieButton.addEventListener("click", ()=>{
+	const filterIndie = filterByIndie(fetchedGameData)
+	console.log(filterIndie);
+	renderData(filterIndie);
+})
+function filterByIndie(data){
+	return data.filter(game => game.genres.some(genre => genre.slug === 'indie'));
+}
+
 
 // ------------------------ Filter game consoles ----------------------
 // PC
