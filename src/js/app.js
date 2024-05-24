@@ -51,6 +51,13 @@ const openSignUpFormButton = document.querySelector(".sign-up-form__open");
 const signUpFormContainer = document.querySelector(".sign-up-form-container");
 const signUpButton = document.querySelector(".sign-up-button");
 
+
+// Selecting the filter buttons 
+const filterByPcButton = document.querySelector("#filter-pc");
+const filterByPlaystationButton = document.querySelector("#filter-playstation");
+const filterByXboxButton = document.querySelector("#filter-xbox");
+const filterByNintendoButton = document.querySelector("#filter-nintendo");
+
 // Selecting the sort buttons
 const sortByReleaseButton = document.querySelector("#sort-release");
 const sortByNameButton = document.querySelector("#sort-name");
@@ -272,4 +279,59 @@ function sortByRelease (data){
 			return Number(a.released.slice(0,4)) - Number(b.released.slice(0,4))
 		})
 	
+}
+
+/* select button 
+add eventlistener 
+insted of data . slice . sort you use data . slice . filter  */
+
+
+// --------- Filter game consoles ----------------------
+// PC
+filterByPcButton.addEventListener("click", ()=>{
+	const filterPc = filterByPc(fetchedGameData)
+	console.log(filterPc);
+	renderData(filterPc);
+})
+/* function filterByPc (data){
+	data.slice().filter()
+} */
+function filterByPc(data) {
+	return data.slice().filter(game => 
+		game.platforms.some(platform => platform.platform.slug === 'pc' || platform.platform.name.toLowerCase() === 'pc')
+	);
+}
+// Playstation 
+filterByPlaystationButton.addEventListener("click", ()=>{
+	const filterPlaystation = filterByPlaystation(fetchedGameData)
+	console.log(filterPlaystation);
+	renderData(filterPlaystation);
+})
+function filterByPlaystation(data) {
+	return data.slice().filter(game => 
+		game.parent_platforms.some(platform => platform.platform.slug === 'playstation' || platform.platform.name.toLowerCase() === 'playstation')
+	);
+}
+
+// xbox
+filterByXboxButton.addEventListener("click", ()=> {
+	const filterXbox = filterByXbox(fetchedGameData)
+	console.log(filterXbox);
+	renderData(filterXbox);
+})
+function filterByXbox(data) {
+	return data.slice().filter(game => 
+		game.parent_platforms.some(platform => platform.platform.slug === 'xbox' || platform.platform.name.toLowerCase() === 'xbox')
+	);
+}
+
+//nintendo
+filterByNintendoButton.addEventListener("click", ()=> {
+	const filterNintendo = filterByNintendo(fetchedGameData)
+	console.log(filterNintendo);
+	renderData(filterNintendo);
+})
+function filterByNintendo(data) {
+	return data.slice().filter(game =>
+		game.parent_platforms.some(platform => platform.slug === 'nintendo' || platform.platform.name.toLowerCase() === 'nintendo'))
 }
