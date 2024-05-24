@@ -306,7 +306,14 @@ function filterByAction(data) {
 }
 
 // Adventure 
-filterByAdventureButton
+filterByAdventureButton.addEventListener("click", ()=>{
+	const filterAdventure = filterByAdventure(fetchedGameData)
+	console.log(filterAdventure);
+	renderData(filterAdventure)
+})
+function filterByAdventure(data) {
+	return data.filter(game => game.genres.some(genre => genre.slug === 'adventure'));
+}
 
 // --------- Filter game consoles ----------------------
 // PC
