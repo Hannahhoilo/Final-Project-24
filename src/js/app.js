@@ -344,7 +344,9 @@ filterByPuzzleButton.addEventListener("click", ()=>{
 	console.log(filterPuzzle);
 	renderData(filterPuzzle);
 })
-
+function filterByPuzzle(data) {
+	return data.filter(game => game.genres.some(genre => genre.slug === 'puzzle'));
+}
 
 
 // ------------------------ Filter game consoles ----------------------
