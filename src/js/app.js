@@ -326,7 +326,11 @@ function filterByRPG (data) {
 }
 
 // Shooter
-filterByShooterButton
+filterByShooterButton.addEventListener("click", ()=>{
+	const filterShooter = filterByShooter(fetchData)
+	console.log(filterShooter);
+	renderData(filterShooter);
+})
 
 // ------------------------ Filter game consoles ----------------------
 // PC
