@@ -414,3 +414,31 @@ function filterByNintendo(data) {
 }
 
 // -----------------------------------------
+
+// -------------- search ---------------------
+
+/* const searchInput = document.querySelector("#search-input");
+
+searchInput.addEventListener("input", (e) => {
+	const searchValue = e.target.value;
+	console.log(searchValue)
+	fetchedGameData.forEach(game => {
+		const searchValueResult = game.name.includes(value)
+		renderData(searchValueResult)
+	})
+}) */
+
+const searchInput = document.querySelector("#search-input");
+
+searchInput.addEventListener("input", (e) => {
+	const searchValue = e.target.value.toLowerCase();
+	console.log(searchValue);
+
+	// Search for the games based on the search value
+	const searchValueResults = fetchedGameData.filter(game => 
+		game.name.toLowerCase().includes(searchValue)
+	);
+
+	// Render the games you are searching for 
+	renderData(searchValueResults);
+});
