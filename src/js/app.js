@@ -189,6 +189,15 @@ async function fetchData() {
     const data = await response.json();
 
     // -----------
+    // Load more button fetch
+    /*     loadButton.addEventListener("click", async () => {
+      const response = await fetch(
+        "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
+      );
+      const data2 = await response.json();
+      fetchedGameData = [...data2.results];
+	  renderData(fetchedGameData); 
+    }); */
 
     // Store the fetched data
     fetchedGameData = [...data.results];
@@ -236,18 +245,37 @@ async function fetchData() {
   }
 }
 
-// Fetch data when the page loads
-fetchData();
-
 // Load more button fetch
 loadButton.addEventListener("click", async () => {
-  const response = await fetch(
-    "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
-  );
-  const data2 = await response.json();
-  renderData(data2.results);
-  fetchedGameData = [data.results, ...data2.results];
+  try {
+    const response = await fetch(
+      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
+    );
+    const data = await response.json();
+    const newGameData = data.results;
+    fetchedGameData = [...fetchedGameData, ...newGameData];
+    renderData(fetchedGameData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 });
+
+loadButton.addEventListener("click", async () => {
+  try {
+    const response = await fetch(
+      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=3"
+    );
+    const data = await response.json();
+    const newGameData3 = data.results;
+    fetchedGameData = [...fetchedGameData, ...newGameData3];
+    renderData(fetchedGameData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+});
+
+// Fetch data when the page loads
+fetchData();
 
 //--------------------------------------------------
 
