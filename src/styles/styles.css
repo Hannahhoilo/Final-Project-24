@@ -383,7 +383,7 @@
 
 .load-more-button-container {
 	display: flex;
-	
+	margin: 3rem;
 	justify-content: center;
  }
 .load-more-button{
