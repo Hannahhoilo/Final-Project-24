@@ -51,7 +51,7 @@ const openSignUpFormButton = document.querySelector(".sign-up-form__open");
 const signUpFormContainer = document.querySelector(".sign-up-form-container");
 const signUpButton = document.querySelector(".sign-up-button");
 
-// Selecting the filter for genre buttons 
+// Selecting the filter for genre buttons
 const filterByActionButton = document.querySelector("#filter-action");
 const filterByAdventureButton = document.querySelector("#filter-adventure");
 const filterByRPGButton = document.querySelector("#filter-rpg");
@@ -60,7 +60,7 @@ const filterByPuzzleButton = document.querySelector("#filter-puzzle");
 const filterByIndieButton = document.querySelector("#filter-indie");
 const filterByPlatformerButton = document.querySelector("#filter-platformer");
 
-// Selecting the filter for consoles buttons 
+// Selecting the filter for consoles buttons
 const filterByPcButton = document.querySelector("#filter-pc");
 const filterByPlaystationButton = document.querySelector("#filter-playstation");
 const filterByXboxButton = document.querySelector("#filter-xbox");
@@ -71,6 +71,8 @@ const sortByReleaseButton = document.querySelector("#sort-release");
 const sortByNameButton = document.querySelector("#sort-name");
 const sortByRatingButton = document.querySelector("#sort-rating");
 
+// LOAD MORE BUTTON
+const loadButton = document.querySelector(".load-more-button");
 
 const gameList = document.querySelector(".game-list");
 const url = `https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f`;
@@ -186,18 +188,8 @@ async function fetchData() {
     );
     const data = await response.json();
 
-	// page 2
-/* 	try {
-		const reponse = await fetch(
-			"https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
+    // -----------
 
-			ny fetch inside the next button 
-		)
-	}
- */
-
-	// -----------
-	
     // Store the fetched data
     fetchedGameData = [...data.results];
     console.log(fetchedGameData);
@@ -238,7 +230,7 @@ async function fetchData() {
     } */
 
     // Initial render of fetched data
-   /*  renderData(fetchedGameData); */
+    /*  renderData(fetchedGameData); */
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -247,16 +239,27 @@ async function fetchData() {
 // Fetch data when the page loads
 fetchData();
 
+// Load more button fetch
+loadButton.addEventListener("click", async () => {
+  const response = await fetch(
+    "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
+  );
+  const data2 = await response.json();
+  renderData(data2.results);
+  fetchedGameData = [data.results, ...data2.results];
+});
+
+//--------------------------------------------------
+
 /* Handle auth state changes */
 onAuthStateChanged(authService, async (user) => {
   if (user) {
-	  await renderData(fetchedGameData);  
-      signOutButton.style.visibility = "visible";
-      signInForm.style.display = "none";
-      welcomeHeaderAndText.style.display = "none";
-      signUpFormContainer.style.display = "none";
-      mainContentContainer.style.display = "flex";
-   
+    await renderData(fetchedGameData);
+    signOutButton.style.visibility = "visible";
+    signInForm.style.display = "none";
+    welcomeHeaderAndText.style.display = "none";
+    signUpFormContainer.style.display = "none";
+    mainContentContainer.style.display = "flex";
   } else {
     mainContentContainer.style.display = "none";
     signOutButton.style.visibility = "hidden";
@@ -266,40 +269,39 @@ onAuthStateChanged(authService, async (user) => {
 });
 
 // --------------------------------------------
-// Sorting the games 
-sortByRatingButton.addEventListener("click",async ()=>{
-	const sortedRatings = await sortByRating(fetchedGameData)
-	console.log(sortedRatings);
-	renderData(sortedRatings)
-})
+// Sorting the games
+sortByRatingButton.addEventListener("click", async () => {
+  const sortedRatings = await sortByRating(fetchedGameData);
+  console.log(sortedRatings);
+  renderData(sortedRatings);
+});
 
-function sortByRating (data){
-	return data.slice().sort((a,b)=> b.rating - a.rating)
+function sortByRating(data) {
+  return data.slice().sort((a, b) => b.rating - a.rating);
 }
 
 //sort the names
-sortByNameButton.addEventListener("click", ()=>{
-	const sortedNames = sortByName(fetchedGameData)
-	console.log(sortedNames);
-	renderData(sortedNames);
-})
+sortByNameButton.addEventListener("click", () => {
+  const sortedNames = sortByName(fetchedGameData);
+  console.log(sortedNames);
+  renderData(sortedNames);
+});
 
-function sortByName (data){
-	return data.slice().sort((a,b)=> a.name.localeCompare(b.name))
+function sortByName(data) {
+  return data.slice().sort((a, b) => a.name.localeCompare(b.name));
 }
 
 // sort by release
-sortByReleaseButton.addEventListener("click", ()=>{
-	const sortedRelease = sortByRelease(fetchedGameData)
-	console.log(sortedRelease);
-	renderData(sortedRelease);
-})
+sortByReleaseButton.addEventListener("click", () => {
+  const sortedRelease = sortByRelease(fetchedGameData);
+  console.log(sortedRelease);
+  renderData(sortedRelease);
+});
 
-function sortByRelease (data){
-		return data.slice().sort((a,b)=>{		
-			return Number(a.released.slice(0,4)) - Number(b.released.slice(0,4))
-		})
-	
+function sortByRelease(data) {
+  return data.slice().sort((a, b) => {
+    return Number(a.released.slice(0, 4)) - Number(b.released.slice(0, 4));
+  });
 }
 
 /* select button 
@@ -308,121 +310,160 @@ insted of data . slice . sort you use data . slice . filter  */
 
 // --------------------------- Filter Genres ---------------------------------
 // Action
-filterByActionButton.addEventListener("click", ()=>{
-	const filterAction = filterByAction(fetchedGameData)
-	console.log(filterAction);
-	renderData(filterAction);
-})
+filterByActionButton.addEventListener("click", () => {
+  const filterAction = filterByAction(fetchedGameData);
+  console.log(filterAction);
+  renderData(filterAction);
+});
 function filterByAction(data) {
-	return data.filter(game => game.genres.some(genre => genre.slug === 'action'));	
+  return data.filter((game) =>
+    game.genres.some((genre) => genre.slug === "action")
+  );
 }
 
-// Adventure 
-filterByAdventureButton.addEventListener("click", ()=>{
-	const filterAdventure = filterByAdventure(fetchedGameData)
-	console.log(filterAdventure);
-	renderData(filterAdventure)
-})
+// Adventure
+filterByAdventureButton.addEventListener("click", () => {
+  const filterAdventure = filterByAdventure(fetchedGameData);
+  console.log(filterAdventure);
+  renderData(filterAdventure);
+});
 function filterByAdventure(data) {
-	return data.filter(game => game.genres.some(genre => genre.slug === 'adventure'));
+  return data.filter((game) =>
+    game.genres.some((genre) => genre.slug === "adventure")
+  );
 }
 
 // RPG
-filterByRPGButton.addEventListener("click", ()=> {
-	const filterRPG = filterByRPG(fetchedGameData)
-	console.log(filterRPG);
-	renderData(filterRPG);
-})
-function filterByRPG (data) {
-	return data.filter(game => game.genres.some(genre => genre.slug === 'role-playing-games-rpg'));
+filterByRPGButton.addEventListener("click", () => {
+  const filterRPG = filterByRPG(fetchedGameData);
+  console.log(filterRPG);
+  renderData(filterRPG);
+});
+function filterByRPG(data) {
+  return data.filter((game) =>
+    game.genres.some((genre) => genre.slug === "role-playing-games-rpg")
+  );
 }
 
 // Shooter
-filterByShooterButton.addEventListener("click", ()=>{
-	const filterShooter = filterByShooter(fetchedGameData)
-	console.log(filterShooter);
-	renderData(filterShooter);
-})
+filterByShooterButton.addEventListener("click", () => {
+  const filterShooter = filterByShooter(fetchedGameData);
+  console.log(filterShooter);
+  renderData(filterShooter);
+});
 function filterByShooter(data) {
-	return data.filter(game => game.genres.some(genre => genre.slug === 'shooter'));
+  return data.filter((game) =>
+    game.genres.some((genre) => genre.slug === "shooter")
+  );
 }
 
 // Puzzle
-filterByPuzzleButton.addEventListener("click", ()=>{
-	const filterPuzzle = filterByPuzzle(fetchedGameData)
-	console.log(filterPuzzle);
-	renderData(filterPuzzle);
-})
+filterByPuzzleButton.addEventListener("click", () => {
+  const filterPuzzle = filterByPuzzle(fetchedGameData);
+  console.log(filterPuzzle);
+  renderData(filterPuzzle);
+});
 function filterByPuzzle(data) {
-	return data.filter(game => game.genres.some(genre => genre.slug === 'puzzle'));
+  return data.filter((game) =>
+    game.genres.some((genre) => genre.slug === "puzzle")
+  );
 }
 
 // Indie
-filterByIndieButton.addEventListener("click", ()=>{
-	const filterIndie = filterByIndie(fetchedGameData)
-	console.log(filterIndie);
-	renderData(filterIndie);
-})
-function filterByIndie(data){
-	return data.filter(game => game.genres.some(genre => genre.slug === 'indie'));
+filterByIndieButton.addEventListener("click", () => {
+  const filterIndie = filterByIndie(fetchedGameData);
+  console.log(filterIndie);
+  renderData(filterIndie);
+});
+function filterByIndie(data) {
+  return data.filter((game) =>
+    game.genres.some((genre) => genre.slug === "indie")
+  );
 }
 
 // Platformer
-filterByPlatformerButton.addEventListener("click", ()=>{
-	const filterPlatformer = filterByPlatformer(fetchedGameData)
-	console.log(filterPlatformer);
-	renderData(filterPlatformer);
-})
-function filterByPlatformer(data){
-	return data.filter(game => game.genres.some(genre => genre.slug === 'platformer'));
+filterByPlatformerButton.addEventListener("click", () => {
+  const filterPlatformer = filterByPlatformer(fetchedGameData);
+  console.log(filterPlatformer);
+  renderData(filterPlatformer);
+});
+function filterByPlatformer(data) {
+  return data.filter((game) =>
+    game.genres.some((genre) => genre.slug === "platformer")
+  );
 }
 
 // -------------------------------- Filter game consoles ---------------------------------
 // PC
-filterByPcButton.addEventListener("click", ()=>{
-	const filterPc = filterByPc(fetchedGameData)
-	console.log(filterPc);
-	renderData(filterPc);
-})
+filterByPcButton.addEventListener("click", () => {
+  const filterPc = filterByPc(fetchedGameData);
+  console.log(filterPc);
+  renderData(filterPc);
+});
 function filterByPc(data) {
-	return data.slice().filter(game => 
-		game.platforms.some(platform => platform.platform.slug === 'pc' || platform.platform.name.toLowerCase() === 'pc')
-	);
+  return data
+    .slice()
+    .filter((game) =>
+      game.platforms.some(
+        (platform) =>
+          platform.platform.slug === "pc" ||
+          platform.platform.name.toLowerCase() === "pc"
+      )
+    );
 }
 
-// Playstation 
-filterByPlaystationButton.addEventListener("click", ()=>{
-	const filterPlaystation = filterByPlaystation(fetchedGameData)
-	console.log(filterPlaystation);
-	renderData(filterPlaystation);
-})
+// Playstation
+filterByPlaystationButton.addEventListener("click", () => {
+  const filterPlaystation = filterByPlaystation(fetchedGameData);
+  console.log(filterPlaystation);
+  renderData(filterPlaystation);
+});
 function filterByPlaystation(data) {
-	return data.slice().filter(game => 
-		game.parent_platforms.some(platform => platform.platform.slug === 'playstation' || platform.platform.name.toLowerCase() === 'playstation')
-	);
+  return data
+    .slice()
+    .filter((game) =>
+      game.parent_platforms.some(
+        (platform) =>
+          platform.platform.slug === "playstation" ||
+          platform.platform.name.toLowerCase() === "playstation"
+      )
+    );
 }
 
 // xbox
-filterByXboxButton.addEventListener("click", ()=> {
-	const filterXbox = filterByXbox(fetchedGameData)
-	console.log(filterXbox);
-	renderData(filterXbox);
-})
+filterByXboxButton.addEventListener("click", () => {
+  const filterXbox = filterByXbox(fetchedGameData);
+  console.log(filterXbox);
+  renderData(filterXbox);
+});
 function filterByXbox(data) {
-	return data.slice().filter(game => 
-		game.parent_platforms.some(platform => platform.platform.slug === 'xbox' || platform.platform.name.toLowerCase() === 'xbox')
-	);
+  return data
+    .slice()
+    .filter((game) =>
+      game.parent_platforms.some(
+        (platform) =>
+          platform.platform.slug === "xbox" ||
+          platform.platform.name.toLowerCase() === "xbox"
+      )
+    );
 }
 
 //nintendo
-filterByNintendoButton.addEventListener("click", ()=> {
-	const filterNintendo = filterByNintendo(fetchedGameData)
-	console.log(filterNintendo);
-	renderData(filterNintendo);
-})
+filterByNintendoButton.addEventListener("click", () => {
+  const filterNintendo = filterByNintendo(fetchedGameData);
+  console.log(filterNintendo);
+  renderData(filterNintendo);
+});
 function filterByNintendo(data) {
-	return data.slice().filter(game =>
-		game.parent_platforms.some(platform => platform.slug === 'nintendo' || platform.platform.name.toLowerCase() === 'nintendo'))
+  return data
+    .slice()
+    .filter((game) =>
+      game.parent_platforms.some(
+        (platform) =>
+          platform.slug === "nintendo" ||
+          platform.platform.name.toLowerCase() === "nintendo"
+      )
+    );
 }
 
 // -----------------------------------------
@@ -443,23 +484,23 @@ searchInput.addEventListener("input", (e) => {
 const searchInput = document.querySelector("#search-input");
 
 searchInput.addEventListener("input", (e) => {
-	const searchValue = e.target.value.toLowerCase();
-	console.log(searchValue);
+  const searchValue = e.target.value.toLowerCase();
+  console.log(searchValue);
 
-	// Search for the games based on the search value
-	const searchValueResults = fetchedGameData.filter(game => 
-		game.name.toLowerCase().includes(searchValue)
-	);
+  // Search for the games based on the search value
+  const searchValueResults = fetchedGameData.filter((game) =>
+    game.name.toLowerCase().includes(searchValue)
+  );
 
-	// Render the games you are searching for 
-	renderData(searchValueResults);
+  // Render the games you are searching for
+  renderData(searchValueResults);
 });
-
 
 // ---- next page ----
 
 // Variable to hold the next page URL
-let nextPageUrl = 'https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2';
+let nextPageUrl =
+  "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2";
 
 // Update nextPageUrl
 nextPageUrl = data.next;
