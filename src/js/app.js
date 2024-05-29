@@ -75,7 +75,7 @@ const sortByRatingButton = document.querySelector("#sort-rating");
 const loadButton = document.querySelector(".load-more-button");
 
 const gameList = document.querySelector(".game-list");
-const url = `https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f`;
+/* const url = `https://api.rawg.io/api/games?key=${API_KEY}`; */
 
 /* SIGNOUT BUTTON */
 const signOutButton = document.querySelector(".sign-out-button");
@@ -184,13 +184,15 @@ signInButton.addEventListener("click", (e) => {
 async function fetchData() {
   try {
     const response = await fetch(
-      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f"
+      `http://localhost:4000/`
     );
     const data = await response.json();
+      const [firstPage, secondPage] = data
 
     // Store the fetched data
-    fetchedGameData = [...data.results];
-    console.log(fetchedGameData);
+    fetchedGameData = [firstPage, secondPage];
+    console.log(...fetchedGameData[0], ...fetchedGameData[1])
+    /* console.log(fetchedGameData); */
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -199,13 +201,7 @@ async function fetchData() {
 // Load more button fetch
  loadButton.addEventListener("click", async () => {
   try {
-    const response = await fetch(
-      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
-    );
-    const data = await response.json();
-    const newGameData = data.results;
-    fetchedGameData = [...fetchedGameData, ...newGameData];
-    renderData(fetchedGameData);
+    renderData([...fetchedGameData[0], ...fetchedGameData[1]]);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -217,7 +213,7 @@ async function fetchData() {
 onAuthStateChanged(authService,  (user) => {
   if (user) {
     fetchData().then(()=>{
-      renderData(fetchedGameData);
+      renderData(fetchedGameData[0]);
     })
     
     signOutButton.style.visibility = "visible";
@@ -236,7 +232,7 @@ onAuthStateChanged(authService,  (user) => {
 // --------------------------------------------
 // Sorting the games
 sortByRatingButton.addEventListener("click", async () => {
-  const sortedRatings = await sortByRating(fetchedGameData);
+  const sortedRatings = await sortByRating(fetchedGameData[0],fetchedGameData[1]);
   console.log(sortedRatings);
   renderData(sortedRatings);
 });
@@ -247,7 +243,7 @@ function sortByRating(data) {
 
 //sort the names
 sortByNameButton.addEventListener("click", () => {
-  const sortedNames = sortByName(fetchedGameData);
+  const sortedNames = sortByName(fetchedGameData[0],fetchedGameData[1]);
   console.log(sortedNames);
   renderData(sortedNames);
 });
@@ -258,7 +254,7 @@ function sortByName(data) {
 
 // sort by release
 sortByReleaseButton.addEventListener("click", () => {
-  const sortedRelease = sortByRelease(fetchedGameData);
+  const sortedRelease = sortByRelease(fetchedGameData[0],fetchedGameData[1]);
   console.log(sortedRelease);
   renderData(sortedRelease);
 });
@@ -273,7 +269,7 @@ function sortByRelease(data) {
 // --------------------------- Filter Genres ---------------------------------
 // Action
 filterByActionButton.addEventListener("click", () => {
-  const filterAction = filterByAction(fetchedGameData);
+  const filterAction = filterByAction(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterAction);
   renderData(filterAction);
 });
@@ -285,7 +281,7 @@ function filterByAction(data) {
 
 // Adventure
 filterByAdventureButton.addEventListener("click", () => {
-  const filterAdventure = filterByAdventure(fetchedGameData);
+  const filterAdventure = filterByAdventure(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterAdventure);
   renderData(filterAdventure);
 });
@@ -297,7 +293,7 @@ function filterByAdventure(data) {
 
 // RPG
 filterByRPGButton.addEventListener("click", () => {
-  const filterRPG = filterByRPG(fetchedGameData);
+  const filterRPG = filterByRPG(fetchedGameData[0], fetchedGameData[1]);
   console.log(filterRPG);
   renderData(filterRPG);
 });
@@ -309,7 +305,7 @@ function filterByRPG(data) {
 
 // Shooter
 filterByShooterButton.addEventListener("click", () => {
-  const filterShooter = filterByShooter(fetchedGameData);
+  const filterShooter = filterByShooter(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterShooter);
   renderData(filterShooter);
 });
@@ -321,7 +317,7 @@ function filterByShooter(data) {
 
 // Puzzle
 filterByPuzzleButton.addEventListener("click", () => {
-  const filterPuzzle = filterByPuzzle(fetchedGameData);
+  const filterPuzzle = filterByPuzzle(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterPuzzle);
   renderData(filterPuzzle);
 });
@@ -333,7 +329,7 @@ function filterByPuzzle(data) {
 
 // Indie
 filterByIndieButton.addEventListener("click", () => {
-  const filterIndie = filterByIndie(fetchedGameData);
+  const filterIndie = filterByIndie(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterIndie);
   renderData(filterIndie);
 });
@@ -345,7 +341,7 @@ function filterByIndie(data) {
 
 // Platformer
 filterByPlatformerButton.addEventListener("click", () => {
-  const filterPlatformer = filterByPlatformer(fetchedGameData);
+  const filterPlatformer = filterByPlatformer(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterPlatformer);
   renderData(filterPlatformer);
 });
@@ -358,7 +354,7 @@ function filterByPlatformer(data) {
 // -------------------------------- Filter game consoles ---------------------------------
 // PC
 filterByPcButton.addEventListener("click", () => {
-  const filterPc = filterByPc(fetchedGameData);
+  const filterPc = filterByPc(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterPc);
   renderData(filterPc);
 });
@@ -376,7 +372,7 @@ function filterByPc(data) {
 
 // Playstation
 filterByPlaystationButton.addEventListener("click", () => {
-  const filterPlaystation = filterByPlaystation(fetchedGameData);
+  const filterPlaystation = filterByPlaystation(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterPlaystation);
   renderData(filterPlaystation);
 });
@@ -394,7 +390,7 @@ function filterByPlaystation(data) {
 
 // xbox
 filterByXboxButton.addEventListener("click", () => {
-  const filterXbox = filterByXbox(fetchedGameData);
+  const filterXbox = filterByXbox(fetchedGameData[0],fetchedGameData[1]);
   console.log(filterXbox);
   renderData(filterXbox);
 });
@@ -410,9 +406,9 @@ function filterByXbox(data) {
     );
 }
 
-//nintendo
+// nintendo
 filterByNintendoButton.addEventListener("click", () => {
-  const filterNintendo = filterByNintendo(fetchedGameData);
+  const filterNintendo = filterByNintendo(fetchedGameData[0], fetchedGameData[1]);
   console.log(filterNintendo);
   renderData(filterNintendo);
 });
@@ -439,7 +435,7 @@ searchInput.addEventListener("input", (e) => {
   console.log(searchValue);
 
   // Search for the games based on the search value
-  const searchValueResults = fetchedGameData.filter((game) =>
+  const searchValueResults = (fetchedGameData[0], fetchedGameData[1]).filter((game) =>
     game.name.toLowerCase().includes(searchValue)
   );
 

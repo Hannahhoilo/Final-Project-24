@@ -1,10 +1,12 @@
 {
+
   "name": "final-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.cjs",
+    "server": "nodemon server.mjs"
   },
   "browserslist": "defaults",
   "keywords": [],
@@ -18,6 +20,12 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "firebase": "^10.11.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "firebase": "^10.11.1",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.2"
   }
+
 }
