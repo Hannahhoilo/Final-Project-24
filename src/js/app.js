@@ -184,7 +184,7 @@ signInButton.addEventListener("click", (e) => {
 async function fetchData() {
   try {
     const response = await fetch(
-      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f"
+      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f", 
     );
     const data = await response.json();
 
@@ -273,6 +273,19 @@ loadButton.addEventListener("click", async () => {
     console.error("Error fetching data:", error);
   }
 });
+loadButton.addEventListener("click", async () => {
+	try {
+	  const response = await fetch(
+		"https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=4"
+	  );
+	  const data = await response.json();
+	  const newGameData4 = data.results;
+	  fetchedGameData = [...fetchedGameData, ...newGameData4];
+	  renderData(fetchedGameData);
+	} catch (error) {
+	  console.error("Error fetching data:", error);
+	}
+  });
 
 // Fetch data when the page loads
 fetchData();
