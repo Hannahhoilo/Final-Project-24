@@ -184,69 +184,20 @@ signInButton.addEventListener("click", (e) => {
 async function fetchData() {
   try {
     const response = await fetch(
-      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f", 
+      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f"
     );
     const data = await response.json();
-
-    // -----------
-    // Load more button fetch
-    /*     loadButton.addEventListener("click", async () => {
-      const response = await fetch(
-        "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
-      );
-      const data2 = await response.json();
-      fetchedGameData = [...data2.results];
-	  renderData(fetchedGameData); 
-    }); */
 
     // Store the fetched data
     fetchedGameData = [...data.results];
     console.log(fetchedGameData);
-
-    // event listeners after data is fetched
-    /* const genreSelect = document.getElementById("filter_by_genre");
-    const platformSelect = document.getElementById("filter_by_platform");
-
-    genreSelect.addEventListener("click", () => {
-      const selectedGenre = genreSelect.value;
-      console.log("Selected genre:", selectedGenre);
-      filterByGenre(fetchedGameData, selectedGenre);
-    });
-
-    platformSelect.addEventListener("click", () => {
-      const selectedPlatform = platformSelect.value;
-      console.log("Selected platform:", selectedPlatform);
-      filterByPlatform(fetchedGameData, selectedPlatform);
-    });
-
-    // Filtering Functions
-    function filterByGenre(games, genre) {
-      const filteredGames = games.filter((game) => {
-        // Ensure genres exist and check for matching genre
-        return game.genres.some((g) => g.name.toLowerCase() === genre.toLowerCase());
-      });
-      console.log("Filtered games by genre:", filteredGames); // Log the filtered games
-      renderData(filteredGames);
-    }
-
-    function filterByPlatform(games, platform) {
-      const filteredGames = games.filter((game) => {
-        // Ensure platforms exist and check for matching platform
-        return game.platforms.some((p) => p.platform.name.toLowerCase() === platform.toLowerCase());
-      });
-      console.log("Filtered games by platform:", filteredGames); // Log the filtered games
-      renderData(filteredGames);
-    } */
-
-    // Initial render of fetched data
-    /*  renderData(fetchedGameData); */
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
 
 // Load more button fetch
-loadButton.addEventListener("click", async () => {
+ loadButton.addEventListener("click", async () => {
   try {
     const response = await fetch(
       "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2"
@@ -260,42 +211,15 @@ loadButton.addEventListener("click", async () => {
   }
 });
 
-loadButton.addEventListener("click", async () => {
-  try {
-    const response = await fetch(
-      "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=3"
-    );
-    const data = await response.json();
-    const newGameData3 = data.results;
-    fetchedGameData = [...fetchedGameData, ...newGameData3];
-    renderData(fetchedGameData);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-});
-loadButton.addEventListener("click", async () => {
-	try {
-	  const response = await fetch(
-		"https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=4"
-	  );
-	  const data = await response.json();
-	  const newGameData4 = data.results;
-	  fetchedGameData = [...fetchedGameData, ...newGameData4];
-	  renderData(fetchedGameData);
-	} catch (error) {
-	  console.error("Error fetching data:", error);
-	}
-  });
-
-// Fetch data when the page loads
-fetchData();
-
 //--------------------------------------------------
 
 /* Handle auth state changes */
-onAuthStateChanged(authService, async (user) => {
+onAuthStateChanged(authService,  (user) => {
   if (user) {
-    await renderData(fetchedGameData);
+    fetchData().then(()=>{
+      renderData(fetchedGameData);
+    })
+    
     signOutButton.style.visibility = "visible";
     signInForm.style.display = "none";
     welcomeHeaderAndText.style.display = "none";
@@ -345,9 +269,6 @@ function sortByRelease(data) {
   });
 }
 
-/* select button 
-add eventlistener 
-insted of data . slice . sort you use data . slice . filter  */
 
 // --------------------------- Filter Genres ---------------------------------
 // Action
@@ -511,17 +432,6 @@ function filterByNintendo(data) {
 
 // -------------- search ---------------------
 
-/* const searchInput = document.querySelector("#search-input");
-
-searchInput.addEventListener("input", (e) => {
-	const searchValue = e.target.value;
-	console.log(searchValue)
-	fetchedGameData.forEach(game => {
-		const searchValueResult = game.name.includes(value)
-		renderData(searchValueResult)
-	})
-}) */
-
 const searchInput = document.querySelector("#search-input");
 
 searchInput.addEventListener("input", (e) => {
@@ -540,7 +450,7 @@ searchInput.addEventListener("input", (e) => {
 // ---- next page ----
 
 // Variable to hold the next page URL
-let nextPageUrl =
+/* let nextPageUrl =
   "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2";
 
 // Update nextPageUrl
@@ -555,4 +465,4 @@ nextPageButton.addEventListener("click", () => {
   } else {
     console.log("No more pages to load.");
   }
-});
+}); */
