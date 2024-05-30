@@ -443,22 +443,6 @@ searchInput.addEventListener("input", (e) => {
   renderData(searchValueResults);
 });
 
-// ---- next page ----
 
-// Variable to hold the next page URL
-/* let nextPageUrl =
-  "https://api.rawg.io/api/games?key=3c463ef7d0934f34bd20df5f0297ed5f&page=2";
 
-// Update nextPageUrl
-nextPageUrl = data.next;
 
-// Event listener for the "Next Page" button
-const nextPageButton = document.querySelector("#next-page-button");
-
-nextPageButton.addEventListener("click", () => {
-  if (nextPageUrl) {
-    fetchData(nextPageUrl);
-  } else {
-    console.log("No more pages to load.");
-  }
-}); */
