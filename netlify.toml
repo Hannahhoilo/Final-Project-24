@@ -1,0 +1,9 @@
+[build]
+  publish = "dist"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/games"
+  to = "/.netlify/functions/games"
+  status = 200
+  

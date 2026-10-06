@@ -181,18 +181,20 @@ signInButton.addEventListener("click", (e) => {
 
 /* ----------  FETCH DATA FROM API -------------- */
 
+/* ----------  FETCH DATA FROM API -------------- */
+
+// Lokalt brukes Express-serveren, ellers /api/games (både på Netlify og Cloudflare)
+const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+const API_URL = isLocal ? "http://localhost:4000/" : "/api/games";
+
 async function fetchData() {
   try {
-    const response = await fetch(
-      `http://localhost:4000/`
-    );
+    const response = await fetch(API_URL);
     const data = await response.json();
-      const [firstPage, secondPage] = data
+    const [firstPage, secondPage] = data;
 
     // Store the fetched data
     fetchedGameData = [firstPage, secondPage];
-    console.log(...fetchedGameData[0], ...fetchedGameData[1])
-    /* console.log(fetchedGameData); */
   } catch (error) {
     console.error("Error fetching data:", error);
   }
